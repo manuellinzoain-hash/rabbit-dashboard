@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rabbit Express — Dashboard Ventas</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f1117;
+    --bg2: #181923;
+    --bg3: #1e2030;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8e8e8;
+    --muted: #6b7280;
+    --hint: #4a4a5e;
+    --orange: #ff6b35;
+    --orange2: #ff8c5a;
+    --teal: #00c9a7;
+    --purple: #a78bfa;
+    --green: #4ade80;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .db { max-width: 1100px; margin: 0 auto; }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo { display: flex; align-items: center; gap: 12px; }
+
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: var(--orange);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 500; font-size: 14px; color: white;
+  }
+
+  .logo-name { font-size: 16px; font-weight: 500; color: white; }
+  .logo-sub { font-size: 11px; color: var(--hint); font-family: var(--mono); margin-top: 2px; }
+
+  .header-right { display: flex; align-items: center; gap: 10px; }
+
+  .badge {
+    font-size: 10px; font-family: var(--mono);
+    padding: 5px 12px; border-radius: 20px;
+  }
+
+  .badge-date { background: rgba(255,107,53,0.12); border: 1px solid rgba(255,107,53,0.2); color: var(--orange2); }
+  .badge-live { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); color: var(--green); display: flex; align-items: center; gap: 5px; }
+  .live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; }
+
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  @media(max-width: 700px) { .kpi-grid { grid-template-columns: repeat(2,1fr); } }
+
+  .kpi {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.4s ease both;
+  }
+
+  .kpi::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .kpi.orange::before { background: var(--orange); }
+  .kpi.teal::before { background: var(--teal); }
+  .kpi.purple::before { background: var(--purple); }
+  .kpi.green::before { background: var(--green); }
+
+  .kpi-label { font-size: 9px; font-family: var(--mono); color: var(--hint); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .kpi-val { font-size: 24px; font-weight: 500; line-height: 1; margin-bottom: 5px; }
+  .kpi.orange .kpi-val { color: var(--orange2); }
+  .kpi.teal .kpi-val { color: var(--teal); }
+  .kpi.purple .kpi-val { color: var(--purple); }
+  .kpi.green .kpi-val { color: var(--green); }
+  .kpi-meta { font-size: 10px; color: var(--hint); font-family: var(--mono); }
+
+  .charts-row {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  @media(max-width: 700px) { .charts-row { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    animation: fadeIn 0.5s ease both;
+  }
+
+  .card-title { font-size: 9px; font-family: var(--mono); color: var(--hint); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; }
+
+  .cat-row { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
+  .cat-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+  .cat-name { font-size: 11px; color: #9ca3af; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cat-bar-wrap { width: 70px; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; }
+  .cat-bar { height: 100%; border-radius: 2px; transition: width 0.6s ease; }
+  .cat-pct { font-size: 10px; font-family: var(--mono); color: var(--hint); width: 28px; text-align: right; }
+
+  .prod-table { width: 100%; border-collapse: collapse; }
+  .prod-table th { font-size: 9px; font-family: var(--mono); color: var(--hint); text-transform: uppercase; letter-spacing: 0.6px; padding: 0 8px 8px 0; text-align: left; border-bottom: 1px solid var(--border); }
+  .prod-table th:last-child, .prod-table td:last-child { text-align: right; padding-right: 0; }
+  .prod-table td { font-size: 11px; color: #9ca3af; padding: 9px 8px 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
+  .prod-table tr:last-child td { border-bottom: none; }
+  .prod-name { font-size: 11px; color: #d1d5db; font-weight: 500; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .tag { font-size: 9px; font-family: var(--mono); padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+  .tag-gnc { background: rgba(255,107,53,0.12); color: var(--orange2); }
+  .tag-inj { background: rgba(167,139,250,0.12); color: var(--purple); }
+  .tag-bomb { background: rgba(55,138,221,0.12); color: #60a5fa; }
+  .tag-ign { background: rgba(250,191,36,0.12); color: #fbbf24; }
+  .tag-amor { background: rgba(74,222,128,0.12); color: var(--green); }
+  .tag-cab { background: rgba(244,63,94,0.12); color: #fb7185; }
+  .tag-otro { background: rgba(107,114,128,0.12); color: var(--muted); }
+
+  .neto { font-family: var(--mono); font-size: 11px; color: var(--green); font-weight: 500; }
+  .full-yes { font-size: 9px; font-family: var(--mono); background: rgba(0,201,167,0.1); color: var(--teal); padding: 2px 7px; border-radius: 4px; }
+  .full-no { font-size: 9px; font-family: var(--mono); background: rgba(107,114,128,0.1); color: var(--muted); padding: 2px 7px; border-radius: 4px; }
+
+  .footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 14px; padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 10px; font-family: var(--mono); color: var(--hint);
+  }
+
+  .refresh-btn {
+    background: rgba(255,107,53,0.1);
+    border: 1px solid rgba(255,107,53,0.2);
+    color: var(--orange2);
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .refresh-btn:hover { background: rgba(255,107,53,0.2); }
+
+  .loading {
+    text-align: center; padding: 60px 20px;
+    color: var(--hint); font-family: var(--mono); font-size: 12px;
+  }
+
+  .loading-dot {
+    display: inline-block;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--orange); margin: 0 3px;
+    animation: bounce 1.2s ease-in-out infinite;
+  }
+
+  .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }
+
+  .error { color: #f87171; font-family: var(--mono); font-size: 11px; text-align: center; padding: 30px; }
+</style>
+</head>
+<body>
+<div class="db">
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">RE</div>
+      <div>
+        <div class="logo-name">Rabbit Express</div>
+        <div class="logo-sub">dashboard · ventas mercado libre</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="badge badge-live"><div class="live-dot"></div><span id="db-date">cargando...</span></div>
+      <button class="refresh-btn" onclick="init()">↻ actualizar</button>
+    </div>
+  </div>
+
+  <div id="loading" class="loading">
+    <div style="margin-bottom:12px"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>
+    conectando con google sheets...
+  </div>
+
+  <div id="content" style="display:none">
+    <div class="kpi-grid">
+      <div class="kpi orange"><div class="kpi-label">Facturación</div><div class="kpi-val" id="k-fact">—</div><div class="kpi-meta" id="k-ord">—</div></div>
+      <div class="kpi teal"><div class="kpi-label">Neto</div><div class="kpi-val" id="k-neto">—</div><div class="kpi-meta" id="k-com">—</div></div>
+      <div class="kpi purple"><div class="kpi-label">Ticket promedio</div><div class="kpi-val" id="k-ticket">—</div><div class="kpi-meta" id="k-cancel">—</div></div>
+      <div class="kpi green"><div class="kpi-label">Proyección mensual</div><div class="kpi-val" id="k-proy">—</div><div class="kpi-meta">al ritmo actual</div></div>
+    </div>
+
+    <div class="charts-row">
+      <div class="card">
+        <div class="card-title">Top productos por facturación</div>
+        <div style="position:relative;width:100%;height:240px;">
+          <canvas id="barChart" role="img" aria-label="Facturación por producto">Facturación por producto.</canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Mix por categoría</div>
+        <div id="cat-legend"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Detalle de productos</div>
+      <div style="overflow-x:auto">
+        <table class="prod-table">
+          <thead><tr>
+            <th>Producto</th>
+            <th>Categoría</th>
+            <th>Cant</th>
+            <th>Full</th>
+            <th>Facturación</th>
+            <th>Neto</th>
+          </tr></thead>
+          <tbody id="prod-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span id="f-left">—</span>
+      <span id="f-right">—</span>
+    </div>
+  </div>
+
+  <div id="err" style="display:none" class="error"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const SHEET_ID = '1cAWlgwOUA3Q18ULkxXJBZ3T_f5IsGhQTwj6jlNJW7mA';
+const RESUMEN_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=RESUMEN`;
+const PRODUCTOS_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=PRODUCTOS`;
+
+let barChartInstance = null;
+
+const fmtK = n => {
+  n = Math.round(n);
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000) return '$' + Math.round(n/1000) + 'K';
+  return '$' + n.toLocaleString('es-AR');
+};
+const fmt = n => '$' + Math.round(n).toLocaleString('es-AR');
+
+const CAT_COLORS = {
+  'GNC y Accesorios': '#ff6b35',
+  'Bombas de Nafta': '#378ADD',
+  'Inyectores': '#a78bfa',
+  'Ignición / Bobinas': '#fbbf24',
+  'Amortiguadores': '#4ade80',
+  'Cables y Bujías': '#fb7185',
+  'Termostatos': '#818cf8',
+  'Bombas de Agua': '#00c9a7',
+  'Motor Eléctrico': '#60a5fa',
+  'Soportes Motor': '#c084fc',
+  'Otros': '#6b7280',
+};
+
+const TAG_CLASS = {
+  'GNC y Accesorios': 'tag-gnc',
+  'Inyectores': 'tag-inj',
+  'Bombas de Nafta': 'tag-bomb',
+  'Bombas de Agua': 'tag-bomb',
+  'Motor Eléctrico': 'tag-bomb',
+  'Ignición / Bobinas': 'tag-ign',
+  'Amortiguadores': 'tag-amor',
+  'Cables y Bujías': 'tag-cab',
+};
+
+function parseGviz(text) {
+  const json = JSON.parse(text.replace(/^[^(]+\(|\);?\s*$/g, ''));
+  const cols = json.table.cols.map(c => c.label);
+  return json.table.rows.map(r => {
+    const obj = {};
+    r.c.forEach((cell, i) => { obj[cols[i]] = cell ? cell.v : null; });
+    return obj;
+  });
+}
+
+async function fetchSheet(url) {
+  const res = await fetch(url);
+  const text = await res.text();
+  return parseGviz(text);
+}
+
+async function init() {
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('content').style.display = 'none';
+  document.getElementById('err').style.display = 'none';
+  document.getElementById('cat-legend').innerHTML = '';
+  document.getElementById('prod-tbody').innerHTML = '';
+
+  if (barChartInstance) { barChartInstance.destroy(); barChartInstance = null; }
+
+  try {
+    const [resumen, productos] = await Promise.all([fetchSheet(RESUMEN_URL), fetchSheet(PRODUCTOS_URL)]);
+
+    const last = resumen[resumen.length - 1];
+    if (!last) throw new Error('Sin datos en RESUMEN');
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+
+    const fecha = last['FECHA'] || '';
+    document.getElementById('db-date').textContent = 'actualizado ' + (fecha || 'hoy');
+
+    const fact = last['FACTURACION'] || last['TOTAL_FACTURACION'] || 0;
+    const neto = last['NETO'] || last['NETO_TOTAL'] || 0;
+    const ticket = last['TICKET_PROMEDIO'] || last['TICKET_PROMEDIO_GLOBAL'] || 0;
+    const proy = last['PROYECCION_MENSUAL'] || 0;
+    const ords = last['ORDENES'] || last['TOTAL_ORDENES'] || 0;
+    const coms = last['COMISIONES'] || last['TOTAL_COMISIONES'] || 0;
+    const cans = last['CANCELADAS'] || last['TOTAL_CANCELADAS'] || 0;
+
+    document.getElementById('k-fact').textContent = fmtK(fact);
+    document.getElementById('k-neto').textContent = fmtK(neto);
+    document.getElementById('k-ticket').textContent = fmtK(ticket);
+    document.getElementById('k-proy').textContent = fmtK(proy);
+    document.getElementById('k-ord').textContent = ords + ' órdenes';
+    document.getElementById('k-com').textContent = fmt(coms) + ' comisiones';
+    document.getElementById('k-cancel').textContent = cans + ' canceladas';
+
+    const todayProds = productos.filter(p => (p['FECHA'] || '') === fecha);
+    const prods = todayProds.length > 0 ? todayProds : productos;
+    const sorted = [...prods].sort((a,b) => (b['FACTURACION']||0) - (a['FACTURACION']||0));
+    const top10 = sorted.slice(0, 10);
+
+    const catMap = {};
+    prods.forEach(p => {
+      const cat = p['CATEGORIA'] || 'Otros';
+      catMap[cat] = (catMap[cat] || 0) + (p['FACTURACION'] || 0);
+    });
+    const totalF = Object.values(catMap).reduce((a,b) => a+b, 0);
+    const catSorted = Object.entries(catMap).sort((a,b) => b[1]-a[1]);
+
+    const catLegend = document.getElementById('cat-legend');
+    catSorted.forEach(([cat, monto]) => {
+      const pct = totalF > 0 ? Math.round((monto/totalF)*100) : 0;
+      const color = CAT_COLORS[cat] || '#6b7280';
+      const div = document.createElement('div');
+      div.className = 'cat-row';
+      div.innerHTML = `<div class="cat-dot" style="background:${color}"></div><div class="cat-name">${cat}</div><div class="cat-bar-wrap"><div class="cat-bar" style="background:${color};width:${pct}%"></div></div><div class="cat-pct">${pct}%</div>`;
+      catLegend.appendChild(div);
+    });
+
+    const tbody = document.getElementById('prod-tbody');
+    top10.forEach(p => {
+      const cat = p['CATEGORIA'] || 'Otros';
+      const tagCls = TAG_CLASS[cat] || 'tag-otro';
+      const esFull = String(p['ES_FULL']||'').toUpperCase() === 'SI';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><div class="prod-name">${p['PRODUCTO']||'—'}</div></td><td><span class="tag ${tagCls}">${cat.split(' ')[0]}</span></td><td>${p['CANTIDAD']||0}</td><td><span class="${esFull?'full-yes':'full-no'}">${esFull?'Full':'No'}</span></td><td style="font-family:'DM Mono',monospace;font-size:11px;color:#9ca3af">${fmt(p['FACTURACION']||0)}</td><td><span class="neto">${fmt(p['NETO']||0)}</span></td>`;
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById('f-left').textContent = prods.length + ' productos · ' + ords + ' órdenes';
+    document.getElementById('f-right').textContent = 'Sheet ID: ' + SHEET_ID.slice(0,12) + '...';
+
+    barChartInstance = new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: top10.map(p => (p['PRODUCTO']||'').split(' ').slice(0,3).join(' ')),
+        datasets: [{
+          data: top10.map(p => p['FACTURACION']||0),
+          backgroundColor: top10.map(p => CAT_COLORS[p['CATEGORIA']] || '#6b7280'),
+          borderRadius: 3,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1e2030',
+            borderColor: 'rgba(255,255,255,0.08)',
+            borderWidth: 1,
+            titleColor: '#9ca3af',
+            bodyColor: '#ff8c5a',
+            callbacks: { label: c => ' ' + fmt(c.raw) }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255,255,255,0.04)' },
+            ticks: { color: '#4a4a5e', font: { size: 9, family: 'DM Mono' }, callback: v => fmtK(v) },
+            border: { color: 'rgba(255,255,255,0.06)' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: '#9ca3af', font: { size: 9 } },
+            border: { color: 'rgba(255,255,255,0.06)' }
+          }
+        }
+      }
+    });
+
+  } catch(e) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('err').style.display = 'block';
+    document.getElementById('err').textContent = 'Error: ' + e.message;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
