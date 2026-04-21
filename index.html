@@ -3,264 +3,298 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rabbit Express — Dashboard Ventas</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Rabbit Express — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f4f0;
+  --surface:#ffffff;
+  --surface2:#faf9f7;
+  --border:#e8e6e0;
+  --border2:#d4d0c8;
+  --text:#1a1a1a;
+  --text2:#555550;
+  --text3:#999890;
+  --orange:#e85d26;
+  --orange-light:#fff3ee;
+  --orange-border:#fcd5c0;
+  --teal:#0a7c5c;
+  --teal-light:#edf7f3;
+  --teal-border:#9fd8c4;
+  --purple:#5b4fcf;
+  --purple-light:#f0eeff;
+  --purple-border:#c5bef5;
+  --amber:#c47d0a;
+  --amber-light:#fffbee;
+  --amber-border:#f5d878;
+  --red:#c0392b;
+  --red-light:#fdf0ee;
+  --red-border:#f5b8b0;
+  --green:#2d7a3a;
+  --green-light:#edf7ef;
+  --green-border:#a8d8b0;
+  --sans:'Plus Jakarta Sans',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.5;padding:20px}
+.wrap{max-width:1200px;margin:0 auto}
 
-  :root {
-    --bg: #0f1117;
-    --bg2: #181923;
-    --bg3: #1e2030;
-    --border: rgba(255,255,255,0.07);
-    --text: #e8e8e8;
-    --muted: #6b7280;
-    --hint: #4a4a5e;
-    --orange: #ff6b35;
-    --orange2: #ff8c5a;
-    --teal: #00c9a7;
-    --purple: #a78bfa;
-    --green: #4ade80;
-    --sans: 'DM Sans', sans-serif;
-    --mono: 'DM Mono', monospace;
-  }
+/* HEADER */
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 20px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:38px;height:38px;background:var(--orange);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px;color:white}
+.logo-name{font-size:16px;font-weight:600;color:var(--text)}
+.logo-sub{font-size:11px;color:var(--text3);font-family:var(--mono)}
+.header-right{display:flex;align-items:center;gap:10px}
+.pill{font-size:10px;font-family:var(--mono);padding:5px 12px;border-radius:20px}
+.pill-date{background:var(--orange-light);border:1px solid var(--orange-border);color:var(--orange)}
+.pill-live{background:var(--green-light);border:1px solid var(--green-border);color:var(--green);display:flex;align-items:center;gap:5px}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.refresh-btn{background:var(--surface);border:1px solid var(--border2);color:var(--text2);font-family:var(--mono);font-size:10px;padding:5px 12px;border-radius:8px;cursor:pointer;transition:all 0.2s}
+.refresh-btn:hover{background:var(--bg);border-color:var(--orange)}
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    min-height: 100vh;
-    padding: 20px;
-  }
+/* META MENSUAL */
+.meta-bar{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 20px;margin-bottom:14px}
+.meta-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.meta-title{font-size:11px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.6px}
+.meta-nums{display:flex;align-items:baseline;gap:8px}
+.meta-actual{font-size:22px;font-weight:600;color:var(--orange)}
+.meta-slash{color:var(--text3);font-size:16px}
+.meta-meta{font-size:22px;font-weight:600;color:var(--text3)}
+.meta-sub{font-size:11px;color:var(--text3);font-family:var(--mono)}
+.progress-track{height:10px;background:var(--bg);border-radius:10px;overflow:hidden;margin-bottom:8px}
+.progress-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--orange),#f5854a);transition:width 1s ease}
+.meta-stats{display:flex;gap:20px}
+.meta-stat{font-size:11px;color:var(--text3);font-family:var(--mono)}
+.meta-stat span{color:var(--text2);font-weight:500}
 
-  .db { max-width: 1100px; margin: 0 auto; }
+/* KPI GRID */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+@media(max-width:700px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.kpi-label{font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px}
+.kpi-val{font-size:22px;font-weight:600;line-height:1;margin-bottom:4px}
+.kpi-meta{font-size:10px;color:var(--text3);font-family:var(--mono)}
+.kpi.orange .kpi-val{color:var(--orange)}
+.kpi.teal .kpi-val{color:var(--teal)}
+.kpi.purple .kpi-val{color:var(--purple)}
+.kpi.green .kpi-val{color:var(--green)}
 
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-  }
+/* CHARTS ROW */
+.charts-row{display:grid;grid-template-columns:1fr 260px;gap:12px;margin-bottom:14px}
+@media(max-width:700px){.charts-row{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
+.card-title{font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:14px}
 
-  .logo { display: flex; align-items: center; gap: 12px; }
+/* CATEGORÍAS */
+.cat-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.cat-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.cat-name{font-size:11px;color:var(--text2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cat-bar-wrap{width:70px;height:4px;background:var(--bg);border-radius:2px}
+.cat-bar{height:100%;border-radius:2px;transition:width 0.8s ease}
+.cat-pct{font-size:10px;font-family:var(--mono);color:var(--text3);width:28px;text-align:right}
 
-  .logo-icon {
-    width: 36px; height: 36px;
-    background: var(--orange);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 500; font-size: 14px; color: white;
-  }
+/* FULL STOCK SECTION */
+.full-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px}
+.full-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.full-alerts{display:flex;gap:8px}
+.alert-chip{font-size:10px;font-family:var(--mono);padding:3px 10px;border-radius:10px}
+.alert-red{background:var(--red-light);color:var(--red);border:1px solid var(--red-border)}
+.alert-amber{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border)}
+.alert-green{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
+.full-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.full-card{border:1px solid var(--border);border-radius:10px;padding:12px;position:relative;overflow:hidden}
+.full-card.urgente{border-color:var(--red-border);background:var(--red-light)}
+.full-card.atencion{border-color:var(--amber-border);background:var(--amber-light)}
+.full-card.ok{border-color:var(--green-border);background:var(--green-light)}
+.full-card.en-camino{border-color:var(--purple-border);background:var(--purple-light)}
+.full-prod{font-size:11px;font-weight:600;color:var(--text);margin-bottom:8px;line-height:1.3}
+.full-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-bottom:8px}
+.full-stat{text-align:center}
+.full-stat-val{font-size:14px;font-weight:600;font-family:var(--mono)}
+.full-stat-label{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:0.4px}
+.full-card.urgente .full-stat-val{color:var(--red)}
+.full-card.atencion .full-stat-val{color:var(--amber)}
+.full-card.ok .full-stat-val{color:var(--green)}
+.full-card.en-camino .full-stat-val{color:var(--purple)}
+.full-weeks-bar{height:6px;background:rgba(0,0,0,0.08);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.full-weeks-fill{height:100%;border-radius:3px;transition:width 0.8s ease}
+.full-card.urgente .full-weeks-fill{background:var(--red)}
+.full-card.atencion .full-weeks-fill{background:var(--amber)}
+.full-card.ok .full-weeks-fill{background:var(--green)}
+.full-card.en-camino .full-weeks-fill{background:var(--purple)}
+.full-badge{font-size:9px;font-family:var(--mono);font-weight:500;padding:2px 8px;border-radius:6px;display:inline-block}
+.full-card.urgente .full-badge{background:var(--red);color:white}
+.full-card.atencion .full-badge{background:var(--amber);color:white}
+.full-card.ok .full-badge{background:var(--green);color:white}
+.full-card.en-camino .full-badge{background:var(--purple);color:white}
+.full-reponer{font-size:10px;color:var(--text3);font-family:var(--mono);margin-top:4px}
 
-  .logo-name { font-size: 16px; font-weight: 500; color: white; }
-  .logo-sub { font-size: 11px; color: var(--hint); font-family: var(--mono); margin-top: 2px; }
+/* PRODUCTOS TABLE */
+.prod-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.prod-table th{font-size:9px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;padding:0 8px 8px 0;text-align:left;border-bottom:1px solid var(--border)}
+.prod-table th:last-child,.prod-table td:last-child{text-align:right;padding-right:0}
+.prod-table td{font-size:11px;color:var(--text2);padding:9px 8px 9px 0;border-bottom:1px solid var(--border);vertical-align:middle}
+.prod-table tr:last-child td{border-bottom:none}
+.prod-name{font-size:11px;color:var(--text);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tag{font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:5px;white-space:nowrap}
+.tag-gnc{background:var(--orange-light);color:var(--orange)}
+.tag-inj{background:var(--purple-light);color:var(--purple)}
+.tag-bomb{background:#e8f4ff;color:#1a6fa8}
+.tag-ign{background:var(--amber-light);color:var(--amber)}
+.tag-amor{background:var(--green-light);color:var(--green)}
+.tag-cab{background:#fff0f5;color:#b5346a}
+.tag-otro{background:var(--bg);color:var(--text3)}
+.neto{font-family:var(--mono);font-size:11px;color:var(--teal);font-weight:500}
+.full-yes{font-size:9px;font-family:var(--mono);background:var(--teal-light);color:var(--teal);padding:2px 7px;border-radius:5px}
+.full-no{font-size:9px;font-family:var(--mono);background:var(--bg);color:var(--text3);padding:2px 7px;border-radius:5px}
 
-  .header-right { display: flex; align-items: center; gap: 10px; }
+/* PROYECCION */
+.proy-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px}
+.proy-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.proy-grid{grid-template-columns:1fr}}
+.insight-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px}
+.insight-title{font-size:11px;font-weight:600;color:var(--text);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.insight-icon{width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.insight-icon.red{background:var(--red-light)}
+.insight-icon.green{background:var(--green-light)}
+.insight-icon.amber{background:var(--amber-light)}
+.insight-icon.purple{background:var(--purple-light)}
+.insight-body{font-size:11px;color:var(--text2);line-height:1.6}
+.insight-body li{margin-left:14px;margin-bottom:3px}
 
-  .badge {
-    font-size: 10px; font-family: var(--mono);
-    padding: 5px 12px; border-radius: 20px;
-  }
+/* FOOTER */
+.footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;font-size:10px;font-family:var(--mono);color:var(--text3)}
 
-  .badge-date { background: rgba(255,107,53,0.12); border: 1px solid rgba(255,107,53,0.2); color: var(--orange2); }
-  .badge-live { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); color: var(--green); display: flex; align-items: center; gap: 5px; }
-  .live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; }
-
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
-
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-
-  @media(max-width: 700px) { .kpi-grid { grid-template-columns: repeat(2,1fr); } }
-
-  .kpi {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 16px;
-    position: relative;
-    overflow: hidden;
-    animation: fadeIn 0.4s ease both;
-  }
-
-  .kpi::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    border-radius: 12px 12px 0 0;
-  }
-
-  .kpi.orange::before { background: var(--orange); }
-  .kpi.teal::before { background: var(--teal); }
-  .kpi.purple::before { background: var(--purple); }
-  .kpi.green::before { background: var(--green); }
-
-  .kpi-label { font-size: 9px; font-family: var(--mono); color: var(--hint); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
-  .kpi-val { font-size: 24px; font-weight: 500; line-height: 1; margin-bottom: 5px; }
-  .kpi.orange .kpi-val { color: var(--orange2); }
-  .kpi.teal .kpi-val { color: var(--teal); }
-  .kpi.purple .kpi-val { color: var(--purple); }
-  .kpi.green .kpi-val { color: var(--green); }
-  .kpi-meta { font-size: 10px; color: var(--hint); font-family: var(--mono); }
-
-  .charts-row {
-    display: grid;
-    grid-template-columns: 1fr 260px;
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-
-  @media(max-width: 700px) { .charts-row { grid-template-columns: 1fr; } }
-
-  .card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px;
-    animation: fadeIn 0.5s ease both;
-  }
-
-  .card-title { font-size: 9px; font-family: var(--mono); color: var(--hint); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; }
-
-  .cat-row { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
-  .cat-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-  .cat-name { font-size: 11px; color: #9ca3af; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .cat-bar-wrap { width: 70px; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; }
-  .cat-bar { height: 100%; border-radius: 2px; transition: width 0.6s ease; }
-  .cat-pct { font-size: 10px; font-family: var(--mono); color: var(--hint); width: 28px; text-align: right; }
-
-  .prod-table { width: 100%; border-collapse: collapse; }
-  .prod-table th { font-size: 9px; font-family: var(--mono); color: var(--hint); text-transform: uppercase; letter-spacing: 0.6px; padding: 0 8px 8px 0; text-align: left; border-bottom: 1px solid var(--border); }
-  .prod-table th:last-child, .prod-table td:last-child { text-align: right; padding-right: 0; }
-  .prod-table td { font-size: 11px; color: #9ca3af; padding: 9px 8px 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
-  .prod-table tr:last-child td { border-bottom: none; }
-  .prod-name { font-size: 11px; color: #d1d5db; font-weight: 500; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-  .tag { font-size: 9px; font-family: var(--mono); padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
-  .tag-gnc { background: rgba(255,107,53,0.12); color: var(--orange2); }
-  .tag-inj { background: rgba(167,139,250,0.12); color: var(--purple); }
-  .tag-bomb { background: rgba(55,138,221,0.12); color: #60a5fa; }
-  .tag-ign { background: rgba(250,191,36,0.12); color: #fbbf24; }
-  .tag-amor { background: rgba(74,222,128,0.12); color: var(--green); }
-  .tag-cab { background: rgba(244,63,94,0.12); color: #fb7185; }
-  .tag-otro { background: rgba(107,114,128,0.12); color: var(--muted); }
-
-  .neto { font-family: var(--mono); font-size: 11px; color: var(--green); font-weight: 500; }
-  .full-yes { font-size: 9px; font-family: var(--mono); background: rgba(0,201,167,0.1); color: var(--teal); padding: 2px 7px; border-radius: 4px; }
-  .full-no { font-size: 9px; font-family: var(--mono); background: rgba(107,114,128,0.1); color: var(--muted); padding: 2px 7px; border-radius: 4px; }
-
-  .footer {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-top: 14px; padding-top: 12px;
-    border-top: 1px solid var(--border);
-    font-size: 10px; font-family: var(--mono); color: var(--hint);
-  }
-
-  .refresh-btn {
-    background: rgba(255,107,53,0.1);
-    border: 1px solid rgba(255,107,53,0.2);
-    color: var(--orange2);
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 5px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .refresh-btn:hover { background: rgba(255,107,53,0.2); }
-
-  .loading {
-    text-align: center; padding: 60px 20px;
-    color: var(--hint); font-family: var(--mono); font-size: 12px;
-  }
-
-  .loading-dot {
-    display: inline-block;
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--orange); margin: 0 3px;
-    animation: bounce 1.2s ease-in-out infinite;
-  }
-
-  .loading-dot:nth-child(2) { animation-delay: 0.2s; }
-  .loading-dot:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes bounce { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }
-
-  .error { color: #f87171; font-family: var(--mono); font-size: 11px; text-align: center; padding: 30px; }
+/* LOADING */
+.loading{text-align:center;padding:60px;color:var(--text3);font-family:var(--mono);font-size:12px}
+.ld{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--orange);margin:0 3px;animation:bounce 1.2s ease-in-out infinite}
+.ld:nth-child(2){animation-delay:0.2s}
+.ld:nth-child(3){animation-delay:0.4s}
+@keyframes bounce{0%,80%,100%{transform:scale(0.6);opacity:0.4}40%{transform:scale(1);opacity:1}}
+.error{color:var(--red);font-family:var(--mono);font-size:11px;text-align:center;padding:30px}
 </style>
 </head>
 <body>
-<div class="db">
-  <div class="header">
-    <div class="logo">
-      <div class="logo-icon">RE</div>
+<div class="wrap">
+
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">RE</div>
+    <div>
+      <div class="logo-name">Rabbit Express</div>
+      <div class="logo-sub">dashboard ventas · mercado libre</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="pill pill-live"><div class="live-dot"></div><span id="db-date">cargando...</span></div>
+    <button class="refresh-btn" onclick="init()">↻ actualizar</button>
+  </div>
+</div>
+
+<div id="loading" class="loading">
+  <div style="margin-bottom:12px"><span class="ld"></span><span class="ld"></span><span class="ld"></span></div>
+  conectando con google sheets...
+</div>
+
+<div id="content" style="display:none">
+
+  <!-- META MENSUAL -->
+  <div class="meta-bar">
+    <div class="meta-header">
       <div>
-        <div class="logo-name">Rabbit Express</div>
-        <div class="logo-sub">dashboard · ventas mercado libre</div>
-      </div>
-    </div>
-    <div class="header-right">
-      <div class="badge badge-live"><div class="live-dot"></div><span id="db-date">cargando...</span></div>
-      <button class="refresh-btn" onclick="init()">↻ actualizar</button>
-    </div>
-  </div>
-
-  <div id="loading" class="loading">
-    <div style="margin-bottom:12px"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>
-    conectando con google sheets...
-  </div>
-
-  <div id="content" style="display:none">
-    <div class="kpi-grid">
-      <div class="kpi orange"><div class="kpi-label">Facturación</div><div class="kpi-val" id="k-fact">—</div><div class="kpi-meta" id="k-ord">—</div></div>
-      <div class="kpi teal"><div class="kpi-label">Neto</div><div class="kpi-val" id="k-neto">—</div><div class="kpi-meta" id="k-com">—</div></div>
-      <div class="kpi purple"><div class="kpi-label">Ticket promedio</div><div class="kpi-val" id="k-ticket">—</div><div class="kpi-meta" id="k-cancel">—</div></div>
-      <div class="kpi green"><div class="kpi-label">Proyección mensual</div><div class="kpi-val" id="k-proy">—</div><div class="kpi-meta">al ritmo actual</div></div>
-    </div>
-
-    <div class="charts-row">
-      <div class="card">
-        <div class="card-title">Top productos por facturación</div>
-        <div style="position:relative;width:100%;height:240px;">
-          <canvas id="barChart" role="img" aria-label="Facturación por producto">Facturación por producto.</canvas>
+        <div class="meta-title">Progreso mensual — meta $30M neto</div>
+        <div class="meta-nums">
+          <div class="meta-actual" id="meta-actual">$0</div>
+          <div class="meta-slash">/</div>
+          <div class="meta-meta">$30M</div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title">Mix por categoría</div>
-        <div id="cat-legend"></div>
+      <div style="text-align:right">
+        <div class="meta-title">Proyección al fin de mes</div>
+        <div style="font-size:20px;font-weight:600;color:var(--purple)" id="meta-proy">—</div>
+        <div class="meta-sub" id="meta-dias">día — de 30</div>
       </div>
     </div>
-
-    <div class="card">
-      <div class="card-title">Detalle de productos</div>
-      <div style="overflow-x:auto">
-        <table class="prod-table">
-          <thead><tr>
-            <th>Producto</th>
-            <th>Categoría</th>
-            <th>Cant</th>
-            <th>Full</th>
-            <th>Facturación</th>
-            <th>Neto</th>
-          </tr></thead>
-          <tbody id="prod-tbody"></tbody>
-        </table>
-      </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="meta-fill" style="width:0%"></div>
     </div>
-
-    <div class="footer">
-      <span id="f-left">—</span>
-      <span id="f-right">—</span>
+    <div class="meta-stats">
+      <div class="meta-stat">facturado hoy <span id="ms-hoy">—</span></div>
+      <div class="meta-stat">promedio diario <span id="ms-prom">—</span></div>
+      <div class="meta-stat">días restantes <span id="ms-rest">—</span></div>
+      <div class="meta-stat">necesitás/día para meta <span id="ms-need">—</span></div>
     </div>
   </div>
 
-  <div id="err" style="display:none" class="error"></div>
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi orange"><div class="kpi-label">Facturación hoy</div><div class="kpi-val" id="k-fact">—</div><div class="kpi-meta" id="k-ord">—</div></div>
+    <div class="kpi teal"><div class="kpi-label">Neto hoy</div><div class="kpi-val" id="k-neto">—</div><div class="kpi-meta" id="k-com">—</div></div>
+    <div class="kpi purple"><div class="kpi-label">Ticket promedio</div><div class="kpi-val" id="k-ticket">—</div><div class="kpi-meta">por orden</div></div>
+    <div class="kpi green"><div class="kpi-label">Cancelaciones</div><div class="kpi-val" id="k-cancel">—</div><div class="kpi-meta">órdenes canceladas</div></div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="charts-row">
+    <div class="card">
+      <div class="card-title">Top productos · facturación</div>
+      <div style="position:relative;width:100%;height:240px">
+        <canvas id="barChart" role="img" aria-label="Facturación por producto">Facturación por producto.</canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Mix por categoría</div>
+      <div id="cat-legend"></div>
+    </div>
+  </div>
+
+  <!-- FULL STOCK -->
+  <div class="full-section">
+    <div class="full-header">
+      <div class="card-title" style="margin-bottom:0">Stock FULL · control de inventario</div>
+      <div class="full-alerts">
+        <div class="alert-chip alert-red" id="cnt-urgente">0 urgentes</div>
+        <div class="alert-chip alert-amber" id="cnt-atencion">0 atención</div>
+        <div class="alert-chip alert-green" id="cnt-ok">0 ok</div>
+      </div>
+    </div>
+    <div class="full-grid" id="full-grid"></div>
+  </div>
+
+  <!-- PRODUCTOS TABLE -->
+  <div class="card" style="margin-bottom:14px">
+    <div class="card-title">Detalle de productos</div>
+    <div style="overflow-x:auto">
+      <table class="prod-table">
+        <thead><tr>
+          <th style="width:35%">Producto</th>
+          <th style="width:14%">Categoría</th>
+          <th style="width:7%">Cant</th>
+          <th style="width:8%">Full</th>
+          <th style="width:18%">Facturación</th>
+          <th style="width:18%">Neto</th>
+        </tr></thead>
+        <tbody id="prod-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PROYECCIÓN E INSIGHTS -->
+  <div class="proy-section">
+    <div class="card-title">Análisis · oportunidades para facturar más</div>
+    <div class="proy-grid" id="insights-grid"></div>
+  </div>
+
+  <div class="footer">
+    <span id="f-left">—</span>
+    <span>sheet: 1cAWlgwOUA3Q18ULkxXJBZ3T_f5IsGhQTwj6jlNJW7mA</span>
+  </div>
+
+</div>
+<div id="err" style="display:none" class="error"></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -273,174 +307,302 @@ let barChartInstance = null;
 
 const fmtK = n => {
   n = Math.round(n);
-  if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
-  if (n >= 1000) return '$' + Math.round(n/1000) + 'K';
-  return '$' + n.toLocaleString('es-AR');
+  if(n>=1000000) return '$'+(n/1000000).toFixed(1)+'M';
+  if(n>=1000) return '$'+Math.round(n/1000)+'K';
+  return '$'+n.toLocaleString('es-AR');
 };
-const fmt = n => '$' + Math.round(n).toLocaleString('es-AR');
+const fmt = n => '$'+Math.round(n).toLocaleString('es-AR');
+const pct = (a,b) => b>0?Math.round((a/b)*100):0;
 
 const CAT_COLORS = {
-  'GNC y Accesorios': '#ff6b35',
-  'Bombas de Nafta': '#378ADD',
-  'Inyectores': '#a78bfa',
-  'Ignición / Bobinas': '#fbbf24',
-  'Amortiguadores': '#4ade80',
-  'Cables y Bujías': '#fb7185',
-  'Termostatos': '#818cf8',
-  'Bombas de Agua': '#00c9a7',
-  'Motor Eléctrico': '#60a5fa',
-  'Soportes Motor': '#c084fc',
-  'Otros': '#6b7280',
+  'GNC y Accesorios':'#e85d26','Bombas de Nafta':'#1a6fa8','Inyectores':'#5b4fcf',
+  'Ignición / Bobinas':'#c47d0a','Amortiguadores':'#2d7a3a','Cables y Bujías':'#b5346a',
+  'Termostatos':'#6b5ce7','Bombas de Agua':'#0a7c5c','Motor Eléctrico':'#1a6fa8',
+  'Soportes Motor':'#7c3aed','Otros':'#999890'
 };
-
 const TAG_CLASS = {
-  'GNC y Accesorios': 'tag-gnc',
-  'Inyectores': 'tag-inj',
-  'Bombas de Nafta': 'tag-bomb',
-  'Bombas de Agua': 'tag-bomb',
-  'Motor Eléctrico': 'tag-bomb',
-  'Ignición / Bobinas': 'tag-ign',
-  'Amortiguadores': 'tag-amor',
-  'Cables y Bujías': 'tag-cab',
+  'GNC y Accesorios':'tag-gnc','Inyectores':'tag-inj','Bombas de Nafta':'tag-bomb',
+  'Bombas de Agua':'tag-bomb','Motor Eléctrico':'tag-bomb','Ignición / Bobinas':'tag-ign',
+  'Amortiguadores':'tag-amor','Cables y Bujías':'tag-cab'
 };
 
-function parseGviz(text) {
-  const json = JSON.parse(text.replace(/^[^(]+\(|\);?\s*$/g, ''));
-  const cols = json.table.cols.map(c => c.label);
-  return json.table.rows.map(r => {
-    const obj = {};
-    r.c.forEach((cell, i) => { obj[cols[i]] = cell ? cell.v : null; });
+// STOCK FULL DATA
+const FULL_STOCK = [
+  {nombre:'GNC Emulador 4 Cil Bosch', enCamino:51, aptas:34, ventas30:82},
+  {nombre:'Llave Conmutadora Carb+Iny 3/4', enCamino:51, aptas:34, ventas30:96},
+  {nombre:'Llave Conmutadora Dual+Emul 4 Cil', enCamino:0, aptas:22, ventas30:41},
+  {nombre:'Bomba Aceite Chevrolet Corsa', enCamino:0, aptas:12, ventas30:20},
+  {nombre:'Llave Conmutadora GNC 5ta Gen', enCamino:8, aptas:8, ventas30:18},
+  {nombre:'Bomba Agua Ford Fiesta/Focus', enCamino:0, aptas:8, ventas30:7},
+  {nombre:'Bomba Agua VW Amarok 2.0 TDI', enCamino:0, aptas:5, ventas30:3},
+  {nombre:'Cables y Bujías Fiat Palio Siena', enCamino:0, aptas:4, ventas30:0},
+  {nombre:'Bomba Agua Chevrolet Corsa', enCamino:0, aptas:4, ventas30:1},
+  {nombre:'Bomba Agua VW Gol Trend Fox', enCamino:0, aptas:4, ventas30:1},
+  {nombre:'Termómetro Digital Infrarrojo', enCamino:30, aptas:0, ventas30:11},
+  {nombre:'Rampa Inyectores GNC 5ta Gen', enCamino:10, aptas:0, ventas30:8},
+  {nombre:'Cable y Bujía Ford Fiesta Ecosport', enCamino:8, aptas:0, ventas30:8},
+  {nombre:'Manómetro GNC 3ra/4ta/5ta', enCamino:4, aptas:0, ventas30:0},
+  {nombre:'Bomba Agua Fiat Palio Siena Punto', enCamino:4, aptas:0, ventas30:0},
+  {nombre:'Bomba Agua VW Gol Power 1.6', enCamino:4, aptas:0, ventas30:0},
+];
+
+function parseGviz(text){
+  const json=JSON.parse(text.replace(/^[^(]+\(|\);?\s*$/g,''));
+  const cols=json.table.cols.map(c=>c.label);
+  return json.table.rows.map(r=>{
+    const obj={};
+    r.c.forEach((cell,i)=>{obj[cols[i]]=cell?cell.v:null;});
     return obj;
   });
 }
 
-async function fetchSheet(url) {
-  const res = await fetch(url);
-  const text = await res.text();
+async function fetchSheet(url){
+  const res=await fetch(url);
+  const text=await res.text();
   return parseGviz(text);
 }
 
-async function init() {
-  document.getElementById('loading').style.display = 'block';
-  document.getElementById('content').style.display = 'none';
-  document.getElementById('err').style.display = 'none';
-  document.getElementById('cat-legend').innerHTML = '';
-  document.getElementById('prod-tbody').innerHTML = '';
+function renderFullStock(ventasDiarias){
+  const grid=document.getElementById('full-grid');
+  grid.innerHTML='';
+  let urgente=0,atencion=0,ok=0;
 
-  if (barChartInstance) { barChartInstance.destroy(); barChartInstance = null; }
+  FULL_STOCK.forEach(p=>{
+    const stockTotal=p.aptas+p.enCamino;
+    const ventasSem=Math.round(p.ventas30/4);
+    const semanas=ventasSem>0?Math.round(stockTotal/ventasSem):99;
+    const reponerBase=Math.max(0,p.ventas30-stockTotal);
+    
+    let estado,badgeText;
+    if(p.aptas===0&&p.enCamino===0&&p.ventas30===0){
+      estado='en-camino'; badgeText='sin actividad';
+    } else if(p.aptas===0&&p.enCamino>0){
+      estado='en-camino'; badgeText='en camino';
+    } else if(semanas<=2){
+      estado='urgente'; badgeText='urgente < 2 sem'; urgente++;
+    } else if(semanas<=4){
+      estado='atencion'; badgeText='atención 2-4 sem'; atencion++;
+    } else {
+      estado='ok'; badgeText='ok > 4 sem'; ok++;
+    }
 
-  try {
-    const [resumen, productos] = await Promise.all([fetchSheet(RESUMEN_URL), fetchSheet(PRODUCTOS_URL)]);
+    const barPct=Math.min(100,semanas>=99?100:semanas*12);
+    const reponer=reponerBase>0?reponerBase:0;
 
-    const last = resumen[resumen.length - 1];
-    if (!last) throw new Error('Sin datos en RESUMEN');
+    const div=document.createElement('div');
+    div.className=`full-card ${estado}`;
+    div.innerHTML=`
+      <div class="full-prod">${p.nombre}</div>
+      <div class="full-stats">
+        <div class="full-stat"><div class="full-stat-val">${p.aptas}</div><div class="full-stat-label">en depósito</div></div>
+        <div class="full-stat"><div class="full-stat-val">${p.enCamino}</div><div class="full-stat-label">en camino</div></div>
+        <div class="full-stat"><div class="full-stat-val">${p.ventas30}</div><div class="full-stat-label">ventas 30d</div></div>
+      </div>
+      <div class="full-weeks-bar"><div class="full-weeks-fill" style="width:${barPct}%"></div></div>
+      <span class="full-badge">${badgeText}</span>
+      ${reponer>0?`<div class="full-reponer">→ reponer ~${reponer}u ya</div>`:''}
+      ${semanas<99&&ventasSem>0?`<div class="full-reponer">agota en ~${semanas} sem (${ventasSem}u/sem)</div>`:''}
+    `;
+    grid.appendChild(div);
+  });
 
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('content').style.display = 'block';
+  document.getElementById('cnt-urgente').textContent=urgente+' urgentes';
+  document.getElementById('cnt-atencion').textContent=atencion+' atención';
+  document.getElementById('cnt-ok').textContent=ok+' ok';
+}
 
-    const fecha = last['FECHA'] || '';
-    document.getElementById('db-date').textContent = 'actualizado ' + (fecha || 'hoy');
+function renderInsights(fact, neto, ords, catMap, totalFact){
+  const catSorted=Object.entries(catMap).sort((a,b)=>b[1]-a[1]);
+  const topCat=catSorted[0]?catSorted[0][0]:'GNC';
+  const topCatPct=catSorted[0]?pct(catSorted[0][1],totalFact):0;
+  
+  const insights=[
+    {
+      color:'red',icon:'⚡',
+      title:'Concentración de riesgo',
+      body:`<ul>
+        <li>${topCat} representa el ${topCatPct}% de tu facturación — demasiada dependencia de una categoría.</li>
+        <li>Si ML te suspende una publicación estrella, perdés gran parte del mes.</li>
+        <li>Diversificar en Inyectores y Bombas reduce este riesgo y suma facturación.</li>
+      </ul>`
+    },
+    {
+      color:'green',icon:'📈',
+      title:'Oportunidades inmediatas',
+      body:`<ul>
+        <li>GNC sube en invierno — stockeate ahora antes de junio. Es tu mayor categoría.</li>
+        <li>Kits de 4 inyectores: vendés de a 1, pero los clientes necesitan 4. Armá kits y subí el ticket.</li>
+        <li>Amortiguadores en kit de 2 (ej: Corsa): duplicás la venta por orden.</li>
+      </ul>`
+    },
+    {
+      color:'amber',icon:'💰',
+      title:'Para llegar a $100M en diciembre',
+      body:`<ul>
+        <li>Necesitás $8.3M neto por mes — actualmente estás en ~$30M (facturación bruta).</li>
+        <li>Triplicar facturación requiere: más productos Full, kits de mayor ticket, y Product Ads.</li>
+        <li>Activar Product Ads en tus 5 top productos puede aumentar visibilidad 3x.</li>
+      </ul>`
+    },
+    {
+      color:'purple',icon:'🚀',
+      title:'Próximos productos a sumar',
+      body:`<ul>
+        <li>Filtros de aceite y aire — alta rotación, bajo precio, muchas unidades por mes.</li>
+        <li>Pastillas de freno — universal, alta demanda, fácil de stockear en Full.</li>
+        <li>Termostatos por marca — ya tenés la categoría, ampliá modelos para VW, Ford, Fiat.</li>
+      </ul>`
+    }
+  ];
 
-    const fact = last['FACTURACION'] || last['TOTAL_FACTURACION'] || 0;
-    const neto = last['NETO'] || last['NETO_TOTAL'] || 0;
-    const ticket = last['TICKET_PROMEDIO'] || last['TICKET_PROMEDIO_GLOBAL'] || 0;
-    const proy = last['PROYECCION_MENSUAL'] || 0;
-    const ords = last['ORDENES'] || last['TOTAL_ORDENES'] || 0;
-    const coms = last['COMISIONES'] || last['TOTAL_COMISIONES'] || 0;
-    const cans = last['CANCELADAS'] || last['TOTAL_CANCELADAS'] || 0;
+  const grid=document.getElementById('insights-grid');
+  grid.innerHTML='';
+  insights.forEach(ins=>{
+    grid.innerHTML+=`
+      <div class="insight-card">
+        <div class="insight-title">
+          <div class="insight-icon ${ins.color}">${ins.icon}</div>
+          ${ins.title}
+        </div>
+        <div class="insight-body">${ins.body}</div>
+      </div>
+    `;
+  });
+}
 
-    document.getElementById('k-fact').textContent = fmtK(fact);
-    document.getElementById('k-neto').textContent = fmtK(neto);
-    document.getElementById('k-ticket').textContent = fmtK(ticket);
-    document.getElementById('k-proy').textContent = fmtK(proy);
-    document.getElementById('k-ord').textContent = ords + ' órdenes';
-    document.getElementById('k-com').textContent = fmt(coms) + ' comisiones';
-    document.getElementById('k-cancel').textContent = cans + ' canceladas';
+async function init(){
+  document.getElementById('loading').style.display='block';
+  document.getElementById('content').style.display='none';
+  document.getElementById('err').style.display='none';
+  document.getElementById('cat-legend').innerHTML='';
+  document.getElementById('prod-tbody').innerHTML='';
+  if(barChartInstance){barChartInstance.destroy();barChartInstance=null;}
 
-    const todayProds = productos.filter(p => (p['FECHA'] || '') === fecha);
-    const prods = todayProds.length > 0 ? todayProds : productos;
-    const sorted = [...prods].sort((a,b) => (b['FACTURACION']||0) - (a['FACTURACION']||0));
-    const top10 = sorted.slice(0, 10);
+  try{
+    const [resumen,productos]=await Promise.all([fetchSheet(RESUMEN_URL),fetchSheet(PRODUCTOS_URL)]);
 
-    const catMap = {};
-    prods.forEach(p => {
-      const cat = p['CATEGORIA'] || 'Otros';
-      catMap[cat] = (catMap[cat] || 0) + (p['FACTURACION'] || 0);
+    const last=resumen[resumen.length-1];
+    if(!last) throw new Error('Sin datos');
+
+    document.getElementById('loading').style.display='none';
+    document.getElementById('content').style.display='block';
+
+    const fecha=last['FECHA']||'';
+    document.getElementById('db-date').textContent='actualizado '+fecha;
+
+    const fact=last['FACTURACION']||last['TOTAL_FACTURACION']||0;
+    const neto=last['NETO']||last['NETO_TOTAL']||0;
+    const ticket=last['TICKET_PROMEDIO']||last['TICKET_PROMEDIO_GLOBAL']||0;
+    const ords=last['ORDENES']||last['TOTAL_ORDENES']||0;
+    const coms=last['COMISIONES']||last['TOTAL_COMISIONES']||0;
+    const cans=last['CANCELADAS']||last['TOTAL_CANCELADAS']||0;
+    const proyMensual=last['PROYECCION_MENSUAL']||0;
+
+    // KPIs
+    document.getElementById('k-fact').textContent=fmtK(fact);
+    document.getElementById('k-neto').textContent=fmtK(neto);
+    document.getElementById('k-ticket').textContent=fmtK(ticket);
+    document.getElementById('k-cancel').textContent=cans;
+    document.getElementById('k-ord').textContent=ords+' órdenes';
+    document.getElementById('k-com').textContent=fmt(coms)+' comisiones';
+
+    // META MENSUAL
+    const META=30000000;
+    const diaStr=fecha?fecha.split('-')[2]:'1';
+    const diaActual=parseInt(diaStr)||1;
+    const diasMes=30;
+    const diasRestantes=diasMes-diaActual;
+
+    // Sumar todo el mes desde el sheet
+    const mesActual=fecha?fecha.substring(0,7):'';
+    const rowsMes=resumen.filter(r=>(r['FECHA']||'').startsWith(mesActual));
+    const netoMes=rowsMes.reduce((a,r)=>a+(r['NETO']||r['NETO_TOTAL']||0),0);
+    const factMes=rowsMes.reduce((a,r)=>a+(r['FACTURACION']||r['TOTAL_FACTURACION']||0),0);
+    const promDiario=diaActual>0?Math.round(netoMes/diaActual):0;
+    const proyFin=promDiario*diasMes;
+    const pctMeta=Math.min(100,pct(netoMes,META));
+    const needPerDay=diasRestantes>0?Math.round((META-netoMes)/diasRestantes):0;
+
+    document.getElementById('meta-actual').textContent=fmtK(netoMes||neto);
+    document.getElementById('meta-proy').textContent=fmtK(proyFin||proyMensual);
+    document.getElementById('meta-dias').textContent='día '+diaActual+' de '+diasMes;
+    document.getElementById('meta-fill').style.width=pctMeta+'%';
+    document.getElementById('ms-hoy').textContent=fmtK(neto);
+    document.getElementById('ms-prom').textContent=fmtK(promDiario);
+    document.getElementById('ms-rest').textContent=diasRestantes+' días';
+    document.getElementById('ms-need').textContent=fmtK(needPerDay)+'/día';
+
+    // PRODUCTOS
+    const todayProds=productos.filter(p=>(p['FECHA']||'')===fecha);
+    const prods=todayProds.length>0?todayProds:productos;
+    const sorted=[...prods].sort((a,b)=>(b['FACTURACION']||0)-(a['FACTURACION']||0));
+    const top10=sorted.slice(0,10);
+
+    // CATEGORÍAS
+    const catMap={};
+    prods.forEach(p=>{
+      const cat=p['CATEGORIA']||'Otros';
+      catMap[cat]=(catMap[cat]||0)+(p['FACTURACION']||0);
     });
-    const totalF = Object.values(catMap).reduce((a,b) => a+b, 0);
-    const catSorted = Object.entries(catMap).sort((a,b) => b[1]-a[1]);
+    const totalFact=Object.values(catMap).reduce((a,b)=>a+b,0);
+    const catSorted=Object.entries(catMap).sort((a,b)=>b[1]-a[1]);
 
-    const catLegend = document.getElementById('cat-legend');
-    catSorted.forEach(([cat, monto]) => {
-      const pct = totalF > 0 ? Math.round((monto/totalF)*100) : 0;
-      const color = CAT_COLORS[cat] || '#6b7280';
-      const div = document.createElement('div');
-      div.className = 'cat-row';
-      div.innerHTML = `<div class="cat-dot" style="background:${color}"></div><div class="cat-name">${cat}</div><div class="cat-bar-wrap"><div class="cat-bar" style="background:${color};width:${pct}%"></div></div><div class="cat-pct">${pct}%</div>`;
-      catLegend.appendChild(div);
+    const catLegend=document.getElementById('cat-legend');
+    catSorted.forEach(([cat,monto])=>{
+      const p=totalFact>0?Math.round((monto/totalFact)*100):0;
+      const color=CAT_COLORS[cat]||'#999890';
+      catLegend.innerHTML+=`<div class="cat-row"><div class="cat-dot" style="background:${color}"></div><div class="cat-name">${cat}</div><div class="cat-bar-wrap"><div class="cat-bar" style="background:${color};width:${p}%"></div></div><div class="cat-pct">${p}%</div></div>`;
     });
 
-    const tbody = document.getElementById('prod-tbody');
-    top10.forEach(p => {
-      const cat = p['CATEGORIA'] || 'Otros';
-      const tagCls = TAG_CLASS[cat] || 'tag-otro';
-      const esFull = String(p['ES_FULL']||'').toUpperCase() === 'SI';
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td><div class="prod-name">${p['PRODUCTO']||'—'}</div></td><td><span class="tag ${tagCls}">${cat.split(' ')[0]}</span></td><td>${p['CANTIDAD']||0}</td><td><span class="${esFull?'full-yes':'full-no'}">${esFull?'Full':'No'}</span></td><td style="font-family:'DM Mono',monospace;font-size:11px;color:#9ca3af">${fmt(p['FACTURACION']||0)}</td><td><span class="neto">${fmt(p['NETO']||0)}</span></td>`;
+    // TABLE
+    const tbody=document.getElementById('prod-tbody');
+    top10.forEach(p=>{
+      const cat=p['CATEGORIA']||'Otros';
+      const tagCls=TAG_CLASS[cat]||'tag-otro';
+      const esFull=String(p['ES_FULL']||'').toUpperCase()==='SI';
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td><div class="prod-name">${p['PRODUCTO']||'—'}</div></td><td><span class="tag ${tagCls}">${cat.split(' ')[0]}</span></td><td>${p['CANTIDAD']||0}</td><td><span class="${esFull?'full-yes':'full-no'}">${esFull?'Full':'No'}</span></td><td style="font-family:var(--mono);font-size:11px">${fmt(p['FACTURACION']||0)}</td><td><span class="neto">${fmt(p['NETO']||0)}</span></td>`;
       tbody.appendChild(tr);
     });
 
-    document.getElementById('f-left').textContent = prods.length + ' productos · ' + ords + ' órdenes';
-    document.getElementById('f-right').textContent = 'Sheet ID: ' + SHEET_ID.slice(0,12) + '...';
+    document.getElementById('f-left').textContent=prods.length+' productos · '+ords+' órdenes · '+fecha;
 
-    barChartInstance = new Chart(document.getElementById('barChart'), {
-      type: 'bar',
-      data: {
-        labels: top10.map(p => (p['PRODUCTO']||'').split(' ').slice(0,3).join(' ')),
-        datasets: [{
-          data: top10.map(p => p['FACTURACION']||0),
-          backgroundColor: top10.map(p => CAT_COLORS[p['CATEGORIA']] || '#6b7280'),
-          borderRadius: 3,
-          borderSkipped: false
+    // FULL STOCK
+    renderFullStock(neto/ords||0);
+
+    // INSIGHTS
+    renderInsights(fact,neto,ords,catMap,totalFact);
+
+    // CHART
+    barChartInstance=new Chart(document.getElementById('barChart'),{
+      type:'bar',
+      data:{
+        labels:top10.map(p=>(p['PRODUCTO']||'').split(' ').slice(0,3).join(' ')),
+        datasets:[{
+          data:top10.map(p=>p['FACTURACION']||0),
+          backgroundColor:top10.map(p=>CAT_COLORS[p['CATEGORIA']]||'#999890'),
+          borderRadius:4,borderSkipped:false
         }]
       },
-      options: {
-        indexAxis: 'y',
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: '#1e2030',
-            borderColor: 'rgba(255,255,255,0.08)',
-            borderWidth: 1,
-            titleColor: '#9ca3af',
-            bodyColor: '#ff8c5a',
-            callbacks: { label: c => ' ' + fmt(c.raw) }
-          }
+      options:{
+        indexAxis:'y',responsive:true,maintainAspectRatio:false,
+        plugins:{
+          legend:{display:false},
+          tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}
         },
-        scales: {
-          x: {
-            grid: { color: 'rgba(255,255,255,0.04)' },
-            ticks: { color: '#4a4a5e', font: { size: 9, family: 'DM Mono' }, callback: v => fmtK(v) },
-            border: { color: 'rgba(255,255,255,0.06)' }
-          },
-          y: {
-            grid: { display: false },
-            ticks: { color: '#9ca3af', font: { size: 9 } },
-            border: { color: 'rgba(255,255,255,0.06)' }
-          }
+        scales:{
+          x:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:9},callback:v=>fmtK(v)}},
+          y:{grid:{display:false},ticks:{font:{size:9}}}
         }
       }
     });
 
-  } catch(e) {
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('err').style.display = 'block';
-    document.getElementById('err').textContent = 'Error: ' + e.message;
+  }catch(e){
+    document.getElementById('loading').style.display='none';
+    document.getElementById('err').style.display='block';
+    document.getElementById('err').textContent='Error: '+e.message;
   }
 }
-
 init();
 </script>
 </body>
