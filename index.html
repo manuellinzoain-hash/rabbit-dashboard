@@ -8,54 +8,29 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f5f4f0;
-  --surface:#ffffff;
-  --surface2:#faf9f7;
-  --border:#e8e6e0;
-  --border2:#d4d0c8;
-  --text:#1a1a1a;
-  --text2:#555550;
-  --text3:#999890;
-  --orange:#e85d26;
-  --orange-light:#fff3ee;
-  --orange-border:#fcd5c0;
-  --teal:#0a7c5c;
-  --teal-light:#edf7f3;
-  --teal-border:#9fd8c4;
-  --purple:#5b4fcf;
-  --purple-light:#f0eeff;
-  --purple-border:#c5bef5;
-  --amber:#c47d0a;
-  --amber-light:#fffbee;
-  --amber-border:#f5d878;
-  --red:#c0392b;
-  --red-light:#fdf0ee;
-  --red-border:#f5b8b0;
-  --green:#2d7a3a;
-  --green-light:#edf7ef;
-  --green-border:#a8d8b0;
-  --sans:'Plus Jakarta Sans',sans-serif;
-  --mono:'JetBrains Mono',monospace;
+  --bg:#f5f4f0;--surface:#ffffff;--surface2:#faf9f7;--border:#e8e6e0;--border2:#d4d0c8;
+  --text:#1a1a1a;--text2:#555550;--text3:#999890;
+  --orange:#e85d26;--orange-light:#fff3ee;--orange-border:#fcd5c0;
+  --teal:#0a7c5c;--teal-light:#edf7f3;--teal-border:#9fd8c4;
+  --purple:#5b4fcf;--purple-light:#f0eeff;--purple-border:#c5bef5;
+  --amber:#c47d0a;--amber-light:#fffbee;--amber-border:#f5d878;
+  --red:#c0392b;--red-light:#fdf0ee;--red-border:#f5b8b0;
+  --green:#2d7a3a;--green-light:#edf7ef;--green-border:#a8d8b0;
+  --sans:'Plus Jakarta Sans',sans-serif;--mono:'JetBrains Mono',monospace;
 }
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.5;padding:20px}
 .wrap{max-width:1200px;margin:0 auto}
-
-/* HEADER */
 .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 20px}
 .logo{display:flex;align-items:center;gap:12px}
 .logo-icon{width:38px;height:38px;background:var(--orange);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px;color:white}
 .logo-name{font-size:16px;font-weight:600;color:var(--text)}
 .logo-sub{font-size:11px;color:var(--text3);font-family:var(--mono)}
 .header-right{display:flex;align-items:center;gap:10px}
-.pill{font-size:10px;font-family:var(--mono);padding:5px 12px;border-radius:20px}
-.pill-date{background:var(--orange-light);border:1px solid var(--orange-border);color:var(--orange)}
-.pill-live{background:var(--green-light);border:1px solid var(--green-border);color:var(--green);display:flex;align-items:center;gap:5px}
+.pill-live{font-size:10px;font-family:var(--mono);padding:5px 12px;border-radius:20px;background:var(--green-light);border:1px solid var(--green-border);color:var(--green);display:flex;align-items:center;gap:5px}
 .live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 .refresh-btn{background:var(--surface);border:1px solid var(--border2);color:var(--text2);font-family:var(--mono);font-size:10px;padding:5px 12px;border-radius:8px;cursor:pointer;transition:all 0.2s}
 .refresh-btn:hover{background:var(--bg);border-color:var(--orange)}
-
-/* META MENSUAL */
 .meta-bar{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 20px;margin-bottom:14px}
 .meta-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .meta-title{font-size:11px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.6px}
@@ -63,14 +38,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .meta-actual{font-size:22px;font-weight:600;color:var(--orange)}
 .meta-slash{color:var(--text3);font-size:16px}
 .meta-meta{font-size:22px;font-weight:600;color:var(--text3)}
-.meta-sub{font-size:11px;color:var(--text3);font-family:var(--mono)}
 .progress-track{height:10px;background:var(--bg);border-radius:10px;overflow:hidden;margin-bottom:8px}
 .progress-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--orange),#f5854a);transition:width 1s ease}
-.meta-stats{display:flex;gap:20px}
+.meta-stats{display:flex;gap:20px;flex-wrap:wrap}
 .meta-stat{font-size:11px;color:var(--text3);font-family:var(--mono)}
 .meta-stat span{color:var(--text2);font-weight:500}
-
-/* KPI GRID */
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
 @media(max-width:700px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
 .kpi{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
@@ -81,58 +53,44 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .kpi.teal .kpi-val{color:var(--teal)}
 .kpi.purple .kpi-val{color:var(--purple)}
 .kpi.green .kpi-val{color:var(--green)}
-
-/* CHARTS ROW */
 .charts-row{display:grid;grid-template-columns:1fr 260px;gap:12px;margin-bottom:14px}
 @media(max-width:700px){.charts-row{grid-template-columns:1fr}}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
 .card-title{font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:14px}
-
-/* CATEGORÍAS */
 .cat-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
 .cat-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 .cat-name{font-size:11px;color:var(--text2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cat-bar-wrap{width:70px;height:4px;background:var(--bg);border-radius:2px}
 .cat-bar{height:100%;border-radius:2px;transition:width 0.8s ease}
 .cat-pct{font-size:10px;font-family:var(--mono);color:var(--text3);width:28px;text-align:right}
-
-/* FULL STOCK SECTION */
 .full-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px}
 .full-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.full-alerts{display:flex;gap:8px}
+.full-alerts{display:flex;gap:8px;flex-wrap:wrap}
 .alert-chip{font-size:10px;font-family:var(--mono);padding:3px 10px;border-radius:10px}
 .alert-red{background:var(--red-light);color:var(--red);border:1px solid var(--red-border)}
 .alert-amber{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border)}
 .alert-green{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
-.full-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
-.full-card{border:1px solid var(--border);border-radius:10px;padding:12px;position:relative;overflow:hidden}
+.full-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.full-card{border:1px solid var(--border);border-radius:10px;padding:12px}
 .full-card.urgente{border-color:var(--red-border);background:var(--red-light)}
 .full-card.atencion{border-color:var(--amber-border);background:var(--amber-light)}
 .full-card.ok{border-color:var(--green-border);background:var(--green-light)}
-.full-card.en-camino{border-color:var(--purple-border);background:var(--purple-light)}
+.full-card.sincamino{border-color:var(--purple-border);background:var(--purple-light)}
 .full-prod{font-size:11px;font-weight:600;color:var(--text);margin-bottom:8px;line-height:1.3}
-.full-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-bottom:8px}
+.full-stats{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:8px}
 .full-stat{text-align:center}
-.full-stat-val{font-size:14px;font-weight:600;font-family:var(--mono)}
+.full-stat-val{font-size:16px;font-weight:600;font-family:var(--mono)}
 .full-stat-label{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:0.4px}
 .full-card.urgente .full-stat-val{color:var(--red)}
 .full-card.atencion .full-stat-val{color:var(--amber)}
 .full-card.ok .full-stat-val{color:var(--green)}
-.full-card.en-camino .full-stat-val{color:var(--purple)}
-.full-weeks-bar{height:6px;background:rgba(0,0,0,0.08);border-radius:3px;overflow:hidden;margin-bottom:6px}
-.full-weeks-fill{height:100%;border-radius:3px;transition:width 0.8s ease}
-.full-card.urgente .full-weeks-fill{background:var(--red)}
-.full-card.atencion .full-weeks-fill{background:var(--amber)}
-.full-card.ok .full-weeks-fill{background:var(--green)}
-.full-card.en-camino .full-weeks-fill{background:var(--purple)}
+.full-card.sincamino .full-stat-val{color:var(--purple)}
 .full-badge{font-size:9px;font-family:var(--mono);font-weight:500;padding:2px 8px;border-radius:6px;display:inline-block}
 .full-card.urgente .full-badge{background:var(--red);color:white}
 .full-card.atencion .full-badge{background:var(--amber);color:white}
 .full-card.ok .full-badge{background:var(--green);color:white}
-.full-card.en-camino .full-badge{background:var(--purple);color:white}
-.full-reponer{font-size:10px;color:var(--text3);font-family:var(--mono);margin-top:4px}
-
-/* PRODUCTOS TABLE */
+.full-card.sincamino .full-badge{background:var(--purple);color:white}
+.full-tipo{font-size:9px;color:var(--text3);font-family:var(--mono);margin-top:4px}
 .prod-table{width:100%;border-collapse:collapse;table-layout:fixed}
 .prod-table th{font-size:9px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;padding:0 8px 8px 0;text-align:left;border-bottom:1px solid var(--border)}
 .prod-table th:last-child,.prod-table td:last-child{text-align:right;padding-right:0}
@@ -150,8 +108,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .neto{font-family:var(--mono);font-size:11px;color:var(--teal);font-weight:500}
 .full-yes{font-size:9px;font-family:var(--mono);background:var(--teal-light);color:var(--teal);padding:2px 7px;border-radius:5px}
 .full-no{font-size:9px;font-family:var(--mono);background:var(--bg);color:var(--text3);padding:2px 7px;border-radius:5px}
-
-/* PROYECCION */
 .proy-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px}
 .proy-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:700px){.proy-grid{grid-template-columns:1fr}}
@@ -164,17 +120,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .insight-icon.purple{background:var(--purple-light)}
 .insight-body{font-size:11px;color:var(--text2);line-height:1.6}
 .insight-body li{margin-left:14px;margin-bottom:3px}
-
-/* FOOTER */
 .footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;font-size:10px;font-family:var(--mono);color:var(--text3)}
-
-/* LOADING */
 .loading{text-align:center;padding:60px;color:var(--text3);font-family:var(--mono);font-size:12px}
 .ld{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--orange);margin:0 3px;animation:bounce 1.2s ease-in-out infinite}
-.ld:nth-child(2){animation-delay:0.2s}
-.ld:nth-child(3){animation-delay:0.4s}
+.ld:nth-child(2){animation-delay:0.2s}.ld:nth-child(3){animation-delay:0.4s}
 @keyframes bounce{0%,80%,100%{transform:scale(0.6);opacity:0.4}40%{transform:scale(1);opacity:1}}
-.error{color:var(--red);font-family:var(--mono);font-size:11px;text-align:center;padding:30px}
+.error-box{color:var(--red);font-family:var(--mono);font-size:11px;text-align:center;padding:30px}
 </style>
 </head>
 <body>
@@ -189,7 +140,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
     </div>
   </div>
   <div class="header-right">
-    <div class="pill pill-live"><div class="live-dot"></div><span id="db-date">cargando...</span></div>
+    <div class="pill-live"><div class="live-dot"></div><span id="db-date">cargando...</span></div>
     <button class="refresh-btn" onclick="init()">↻ actualizar</button>
   </div>
 </div>
@@ -201,7 +152,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 
 <div id="content" style="display:none">
 
-  <!-- META MENSUAL -->
   <div class="meta-bar">
     <div class="meta-header">
       <div>
@@ -215,21 +165,18 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
       <div style="text-align:right">
         <div class="meta-title">Proyección al fin de mes</div>
         <div style="font-size:20px;font-weight:600;color:var(--purple)" id="meta-proy">—</div>
-        <div class="meta-sub" id="meta-dias">día — de 30</div>
+        <div style="font-size:11px;color:var(--text3);font-family:var(--mono)" id="meta-dias">—</div>
       </div>
     </div>
-    <div class="progress-track">
-      <div class="progress-fill" id="meta-fill" style="width:0%"></div>
-    </div>
+    <div class="progress-track"><div class="progress-fill" id="meta-fill" style="width:0%"></div></div>
     <div class="meta-stats">
-      <div class="meta-stat">facturado hoy <span id="ms-hoy">—</span></div>
+      <div class="meta-stat">facturación 30d <span id="ms-fact30">—</span></div>
+      <div class="meta-stat">neto 30d <span id="ms-neto30">—</span></div>
       <div class="meta-stat">promedio diario <span id="ms-prom">—</span></div>
-      <div class="meta-stat">días restantes <span id="ms-rest">—</span></div>
       <div class="meta-stat">necesitás/día para meta <span id="ms-need">—</span></div>
     </div>
   </div>
 
-  <!-- KPIs — últimos 30 días -->
   <div class="kpi-grid">
     <div class="kpi orange"><div class="kpi-label">Facturación 30 días</div><div class="kpi-val" id="k-fact">—</div><div class="kpi-meta" id="k-ord">—</div></div>
     <div class="kpi teal"><div class="kpi-label">Neto 30 días</div><div class="kpi-val" id="k-neto">—</div><div class="kpi-meta" id="k-com">—</div></div>
@@ -237,12 +184,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
     <div class="kpi green"><div class="kpi-label">Cancelaciones</div><div class="kpi-val" id="k-cancel">—</div><div class="kpi-meta">últimos 30 días</div></div>
   </div>
 
-  <!-- CHARTS -->
   <div class="charts-row">
     <div class="card">
       <div class="card-title">Top productos · facturación 30 días</div>
       <div style="position:relative;width:100%;height:240px">
-        <canvas id="barChart" role="img" aria-label="Facturación por producto últimos 30 días">Facturación por producto.</canvas>
+        <canvas id="barChart" role="img" aria-label="Facturación por producto">Top productos.</canvas>
       </div>
     </div>
     <div class="card">
@@ -251,7 +197,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
     </div>
   </div>
 
-  <!-- FULL STOCK -->
   <div class="full-section">
     <div class="full-header">
       <div class="card-title" style="margin-bottom:0">Stock FULL · control de inventario</div>
@@ -262,29 +207,27 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
       </div>
     </div>
     <div class="full-grid" id="full-grid">
-      <div style="font-family:var(--mono);font-size:11px;color:var(--text3);padding:20px">cargando stock full...</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--text3);padding:10px">cargando stock full...</div>
     </div>
   </div>
 
-  <!-- PRODUCTOS TABLE -->
   <div class="card" style="margin-bottom:14px">
     <div class="card-title">Top 10 productos · últimos 30 días</div>
     <div style="overflow-x:auto">
       <table class="prod-table">
         <thead><tr>
-          <th style="width:35%">Producto</th>
+          <th style="width:38%">Producto</th>
           <th style="width:14%">Categoría</th>
           <th style="width:7%">Cant</th>
           <th style="width:8%">Full</th>
-          <th style="width:18%">Facturación</th>
-          <th style="width:18%">Neto</th>
+          <th style="width:16%">Facturación</th>
+          <th style="width:17%">Neto</th>
         </tr></thead>
         <tbody id="prod-tbody"></tbody>
       </table>
     </div>
   </div>
 
-  <!-- PROYECCIÓN E INSIGHTS -->
   <div class="proy-section">
     <div class="card-title">Análisis · oportunidades para facturar más</div>
     <div class="proy-grid" id="insights-grid"></div>
@@ -294,101 +237,114 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
     <span id="f-left">—</span>
     <span>sheet: 1cAWlgwOUA3Q18ULkxXJBZ3T_f5IsGhQTwj6jlNJW7mA</span>
   </div>
-
 </div>
-<div id="err" style="display:none" class="error"></div>
+
+<div id="err" style="display:none" class="error-box"></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const SHEET_ID = '1cAWlgwOUA3Q18ULkxXJBZ3T_f5IsGhQTwj6jlNJW7mA';
-const RESUMEN_URL  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=RESUMEN`;
-const PRODUCTOS_URL= `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=PRODUCTOS`;
-const FULL_URL     = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=FULL`;
-
-// Meta mensual
-const META = 100000000;
-
-let barChartInstance = null;
-
-const fmtK = n => {
-  n = Math.round(n);
-  if(n>=1000000) return '$'+(n/1000000).toFixed(1)+'M';
-  if(n>=1000) return '$'+Math.round(n/1000)+'K';
-  return '$'+n.toLocaleString('es-AR');
-};
-const fmt = n => '$'+Math.round(n).toLocaleString('es-AR');
-const pct = (a,b) => b>0?Math.round((a/b)*100):0;
-
+const SHEET_ID   = '1cAWlgwOUA3Q18ULkxXJBZ3T_f5IsGhQTwj6jlNJW7mA';
+const META       = 100000000;
 const CAT_COLORS = {
   'GNC y Accesorios':'#e85d26','Bombas de Nafta':'#1a6fa8','Inyectores':'#5b4fcf',
-  'Ignición / Bobinas':'#c47d0a','Amortiguadores':'#2d7a3a','Cables y Bujías':'#b5346a',
-  'Termostatos':'#6b5ce7','Bombas de Agua':'#0a7c5c','Motor Eléctrico':'#1a6fa8',
-  'Soportes Motor':'#7c3aed','Otros':'#999890'
+  'Ignición / Bobinas':'#c47d0a','Ignicion / Bobinas':'#c47d0a',
+  'Amortiguadores':'#2d7a3a','Cables y Bujias':'#b5346a','Cables y Bujías':'#b5346a',
+  'Termostatos':'#6b5ce7','Bombas de Agua':'#0a7c5c','Otros':'#999890'
 };
 const TAG_CLASS = {
   'GNC y Accesorios':'tag-gnc','Inyectores':'tag-inj','Bombas de Nafta':'tag-bomb',
-  'Bombas de Agua':'tag-bomb','Motor Eléctrico':'tag-bomb','Ignición / Bobinas':'tag-ign',
-  'Amortiguadores':'tag-amor','Cables y Bujías':'tag-cab'
+  'Bombas de Agua':'tag-bomb','Ignición / Bobinas':'tag-ign','Ignicion / Bobinas':'tag-ign',
+  'Amortiguadores':'tag-amor','Cables y Bujias':'tag-cab','Cables y Bujías':'tag-cab'
 };
+
+let barChartInstance = null;
+
+const fmtK = n=>{n=Math.round(n);if(n>=1000000)return '$'+(n/1000000).toFixed(1)+'M';if(n>=1000)return '$'+Math.round(n/1000)+'K';return '$'+n.toLocaleString('es-AR')};
+const fmt  = n=>'$'+Math.round(n).toLocaleString('es-AR');
+const pct  = (a,b)=>b>0?Math.round((a/b)*100):0;
 
 function parseGviz(text){
   const json=JSON.parse(text.replace(/^[^(]+\(|\);?\s*$/g,''));
   const cols=json.table.cols.map(c=>c.label);
-  return json.table.rows.map(r=>{
-    const obj={};
-    r.c.forEach((cell,i)=>{obj[cols[i]]=cell?cell.v:null;});
-    return obj;
-  });
+  return json.table.rows.map(r=>{const o={};r.c.forEach((c,i)=>{o[cols[i]]=c?c.v:null});return o});
 }
-
-async function fetchSheet(url){
+async function fetchSheet(name){
+  const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(name)}`;
   const res=await fetch(url);
-  const text=await res.text();
-  return parseGviz(text);
+  return parseGviz(await res.text());
 }
 
-// Filtra últimas N filas por fecha (últimos 30 días desde la última fecha disponible)
-function getLast30Days(rows, campoFecha){
-  if(!rows.length) return rows;
-  const fechas = rows.map(r => r[campoFecha]||'').filter(Boolean).sort();
+// Filtra filas de los últimos 30 días desde la fecha más reciente
+function last30(rows, col){
+  const fechas=rows.map(r=>String(r[col]||'')).filter(Boolean).sort();
   if(!fechas.length) return rows;
-  const ultima = fechas[fechas.length-1];
-  const d = new Date(ultima);
-  d.setDate(d.getDate()-29);
-  const desde = d.toISOString().split('T')[0];
-  return rows.filter(r => (r[campoFecha]||'') >= desde);
+  const ultima=fechas[fechas.length-1].substring(0,10);
+  const d=new Date(ultima); d.setDate(d.getDate()-29);
+  const desde=d.toISOString().split('T')[0];
+  return rows.filter(r=>String(r[col]||'').substring(0,10)>=desde);
 }
 
-// ---- FULL STOCK: lee desde hoja FULL ----
-function renderFullStock(fullRows){
-  const grid = document.getElementById('full-grid');
-  grid.innerHTML='';
-  let urgente=0, atencion=0, ok=0;
+// Agrupa productos sumando cantidades, facturación y neto
+function agruparProductos(rows){
+  const map={};
+  rows.forEach(p=>{
+    const k=p['PRODUCTO']||'—';
+    if(!map[k]) map[k]={PRODUCTO:k,CATEGORIA:p['CATEGORIA']||'Otros',ES_FULL:p['ES_FULL']||'',CANTIDAD:0,FACTURACION:0,COMISIONES:0,NETO:0};
+    map[k].CANTIDAD    +=(parseFloat(p['CANTIDAD'])||0);
+    map[k].FACTURACION +=(parseFloat(p['FACTURACION'])||0);
+    map[k].COMISIONES  +=(parseFloat(p['COMISIONES'])||0);
+    map[k].NETO        +=(parseFloat(p['NETO'])||0);
+  });
+  return Object.values(map).sort((a,b)=>b.FACTURACION-a.FACTURACION);
+}
 
-  if(!fullRows || fullRows.length===0){
-    grid.innerHTML='<div style="font-family:var(--mono);font-size:11px;color:var(--text3);padding:20px">Sin datos en hoja FULL todavía.</div>';
+// FULL: agrupa por producto, toma el último stock disponible
+function procesarFull(rows){
+  // Columnas: FECHA, PRODUCTO, ITEM_ID, STOCK_DISPONIBLE, TIPO_LOGISTICA
+  // Quedarse con la última entrada por producto (fecha más reciente)
+  const map={};
+  rows.forEach(r=>{
+    const k=r['PRODUCTO']||r['ITEM_ID']||'—';
+    if(!map[k] || String(r['FECHA']||'')>String(map[k].FECHA||'')){
+      map[k]={
+        nombre: r['PRODUCTO']||r['ITEM_ID']||'—',
+        stock:  parseFloat(r['STOCK_DISPONIBLE']||0),
+        tipo:   r['TIPO_LOGISTICA']||'',
+        fecha:  r['FECHA']||''
+      };
+    }
+  });
+  return Object.values(map);
+}
+
+function renderFull(fullRows, prodsAgrup30){
+  const grid=document.getElementById('full-grid');
+  grid.innerHTML='';
+  let urgente=0,atencion=0,ok=0;
+
+  if(!fullRows.length){
+    grid.innerHTML='<div style="font-family:var(--mono);font-size:11px;color:var(--text3);padding:10px">Sin datos en hoja FULL.</div>';
     return;
   }
 
-  fullRows.forEach(p=>{
-    // Columnas esperadas en la hoja FULL:
-    // PRODUCTO, STOCK_FULL, EN_CAMINO, VENTAS_30, CATEGORIA (opcionales extras)
-    const nombre  = p['PRODUCTO'] || p['Producto'] || '—';
-    const aptas   = parseFloat(p['STOCK_FULL'] || p['Stock_Full'] || p['stock_full'] || 0);
-    const enCamino= parseFloat(p['EN_CAMINO']  || p['En_Camino']  || p['en_camino']  || 0);
-    const ventas30= parseFloat(p['VENTAS_30']  || p['Ventas_30']  || p['ventas_30']  || 0);
+  // Mapa de ventas 30d por nombre de producto (coincidencia parcial)
+  const ventas30map={};
+  prodsAgrup30.forEach(p=>{ventas30map[p.PRODUCTO.toLowerCase()]=p.CANTIDAD});
 
-    const stockTotal = aptas + enCamino;
-    const ventasSem  = Math.round(ventas30/4);
-    const semanas    = ventasSem>0 ? Math.round(stockTotal/ventasSem) : 99;
-    const reponer    = Math.max(0, ventas30 - stockTotal);
+  fullRows.forEach(p=>{
+    const nombre  = p.nombre;
+    const stock   = p.stock;
+    const tipo    = p.tipo;
+    // buscar ventas30 por coincidencia de nombre
+    const key = Object.keys(ventas30map).find(k=>k.includes(nombre.toLowerCase().split(' ')[0].substring(0,8))||nombre.toLowerCase().includes(k.split(' ')[0].substring(0,8)));
+    const ventas30 = key ? ventas30map[key] : 0;
+    const ventasSem = Math.round(ventas30/4);
+    const semanas   = ventasSem>0 ? Math.round(stock/ventasSem) : (stock>0?99:0);
 
     let estado, badgeText;
-    if(aptas===0 && enCamino===0 && ventas30===0){
-      estado='en-camino'; badgeText='sin actividad';
-    } else if(aptas===0 && enCamino>0){
-      estado='en-camino'; badgeText='en camino';
+    if(stock===0){
+      estado='urgente'; badgeText='sin stock'; urgente++;
     } else if(semanas<=2){
       estado='urgente'; badgeText='urgente < 2 sem'; urgente++;
     } else if(semanas<=4){
@@ -397,88 +353,57 @@ function renderFullStock(fullRows){
       estado='ok'; badgeText='ok > 4 sem'; ok++;
     }
 
-    const barPct = Math.min(100, semanas>=99?100:semanas*12);
-
-    const div = document.createElement('div');
-    div.className = `full-card ${estado}`;
-    div.innerHTML = `
+    const div=document.createElement('div');
+    div.className=`full-card ${estado}`;
+    div.innerHTML=`
       <div class="full-prod">${nombre}</div>
       <div class="full-stats">
-        <div class="full-stat"><div class="full-stat-val">${aptas}</div><div class="full-stat-label">en depósito</div></div>
-        <div class="full-stat"><div class="full-stat-val">${enCamino}</div><div class="full-stat-label">en camino</div></div>
-        <div class="full-stat"><div class="full-stat-val">${ventas30}</div><div class="full-stat-label">ventas 30d</div></div>
+        <div class="full-stat"><div class="full-stat-val">${stock}</div><div class="full-stat-label">stock full</div></div>
+        <div class="full-stat"><div class="full-stat-val">${ventas30||'—'}</div><div class="full-stat-label">ventas 30d</div></div>
       </div>
-      <div class="full-weeks-bar"><div class="full-weeks-fill" style="width:${barPct}%"></div></div>
       <span class="full-badge">${badgeText}</span>
-      ${reponer>0?`<div class="full-reponer">→ reponer ~${reponer}u ya</div>`:''}
-      ${semanas<99&&ventasSem>0?`<div class="full-reponer">agota en ~${semanas} sem (${ventasSem}u/sem)</div>`:''}
+      ${semanas<99&&ventasSem>0?`<div class="full-tipo">agota en ~${semanas} sem</div>`:''}
+      <div class="full-tipo">${tipo}</div>
     `;
     grid.appendChild(div);
   });
 
-  document.getElementById('cnt-urgente').textContent = urgente+' urgentes';
-  document.getElementById('cnt-atencion').textContent = atencion+' atención';
-  document.getElementById('cnt-ok').textContent = ok+' ok';
+  document.getElementById('cnt-urgente').textContent=urgente+' urgentes';
+  document.getElementById('cnt-atencion').textContent=atencion+' atención';
+  document.getElementById('cnt-ok').textContent=ok+' ok';
 }
 
 function renderInsights(netoMes, totalFact, catMap){
-  const catSorted = Object.entries(catMap).sort((a,b)=>b[1]-a[1]);
-  const topCat    = catSorted[0]?catSorted[0][0]:'GNC';
-  const topCatPct = catSorted[0]?pct(catSorted[0][1],totalFact):0;
-  const necesitaMes = META;
-  const necesitaDia = Math.round(necesitaMes/30);
+  const catSorted=Object.entries(catMap).sort((a,b)=>b[1]-a[1]);
+  const topCat=catSorted[0]?catSorted[0][0]:'GNC';
+  const topCatPct=catSorted[0]?pct(catSorted[0][1],totalFact):0;
+  const necesitaDia=Math.round(META/30);
 
   const insights=[
-    {
-      color:'red',icon:'⚡',
-      title:'Concentración de riesgo',
-      body:`<ul>
-        <li>${topCat} representa el ${topCatPct}% de tu facturación — demasiada dependencia de una categoría.</li>
-        <li>Si ML te suspende una publicación estrella, perdés gran parte del mes.</li>
-        <li>Diversificar en Inyectores y Bombas reduce este riesgo y suma facturación.</li>
-      </ul>`
-    },
-    {
-      color:'green',icon:'📈',
-      title:'Oportunidades inmediatas',
-      body:`<ul>
-        <li>GNC sube en invierno — stockeate ahora antes de junio. Es tu mayor categoría.</li>
-        <li>Kits de 4 inyectores: vendés de a 1, pero los clientes necesitan 4. Armá kits y subí el ticket.</li>
-        <li>Amortiguadores en kit de 2 (ej: Corsa): duplicás la venta por orden.</li>
-      </ul>`
-    },
-    {
-      color:'amber',icon:'💰',
-      title:'Para llegar a $100M mensual',
-      body:`<ul>
-        <li>Necesitás ${fmtK(necesitaDia)} neto por día — revisá si el promedio diario actual está cerca.</li>
-        <li>Triplicar facturación requiere: más productos Full, kits de mayor ticket, y Product Ads.</li>
-        <li>Activar Product Ads en tus 5 top productos puede aumentar la visibilidad 3x.</li>
-      </ul>`
-    },
-    {
-      color:'purple',icon:'🚀',
-      title:'Próximos productos a sumar',
-      body:`<ul>
-        <li>Filtros de aceite y aire — alta rotación, bajo precio, muchas unidades por mes.</li>
-        <li>Pastillas de freno — universal, alta demanda, fácil de stockear en Full.</li>
-        <li>Termostatos por marca — ya tenés la categoría, ampliá modelos para VW, Ford, Fiat.</li>
-      </ul>`
-    }
+    {color:'red',icon:'⚡',title:'Concentración de riesgo',body:`<ul>
+      <li>${topCat} representa el ${topCatPct}% de tu facturación.</li>
+      <li>Si ML te suspende una publicación estrella, perdés gran parte del mes.</li>
+      <li>Diversificar en Inyectores y Bombas reduce este riesgo.</li></ul>`},
+    {color:'green',icon:'📈',title:'Oportunidades inmediatas',body:`<ul>
+      <li>GNC sube en invierno — stockeate antes de junio.</li>
+      <li>Kits de 4 inyectores: los clientes necesitan 4, vendés 1. Armá kits y subí el ticket.</li>
+      <li>Amortiguadores en kit de 2 (ej: Corsa): duplicás la venta por orden.</li></ul>`},
+    {color:'amber',icon:'💰',title:'Para llegar a $100M mensual',body:`<ul>
+      <li>Necesitás ${fmtK(necesitaDia)} neto por día.</li>
+      <li>Más productos Full + kits de mayor ticket + Product Ads en tus top 5.</li>
+      <li>Product Ads puede aumentar la visibilidad 3x en tus mejores publicaciones.</li></ul>`},
+    {color:'purple',icon:'🚀',title:'Próximos productos a sumar',body:`<ul>
+      <li>Filtros de aceite y aire — alta rotación, muchas unidades por mes.</li>
+      <li>Pastillas de freno — universal, alta demanda, fácil de stockear en Full.</li>
+      <li>Termostatos por marca — ampliá modelos para VW, Ford, Fiat.</li></ul>`}
   ];
 
-  const grid = document.getElementById('insights-grid');
+  const grid=document.getElementById('insights-grid');
   grid.innerHTML='';
   insights.forEach(ins=>{
-    grid.innerHTML+=`
-      <div class="insight-card">
-        <div class="insight-title">
-          <div class="insight-icon ${ins.color}">${ins.icon}</div>
-          ${ins.title}
-        </div>
-        <div class="insight-body">${ins.body}</div>
-      </div>
-    `;
+    grid.innerHTML+=`<div class="insight-card">
+      <div class="insight-title"><div class="insight-icon ${ins.color}">${ins.icon}</div>${ins.title}</div>
+      <div class="insight-body">${ins.body}</div></div>`;
   });
 }
 
@@ -491,139 +416,115 @@ async function init(){
   if(barChartInstance){barChartInstance.destroy();barChartInstance=null;}
 
   try{
-    // Fetch las 3 hojas en paralelo. Si FULL falla, seguimos igual.
-    const [resumen, productos, fullRaw] = await Promise.allSettled([
-      fetchSheet(RESUMEN_URL),
-      fetchSheet(PRODUCTOS_URL),
-      fetchSheet(FULL_URL)
+    const [resR, prodR, fullR] = await Promise.allSettled([
+      fetchSheet('RESUMEN'), fetchSheet('PRODUCTOS'), fetchSheet('FULL')
     ]);
 
-    const resumenData  = resumen.status==='fulfilled'  ? resumen.value  : [];
-    const productosData= productos.status==='fulfilled' ? productos.value : [];
-    const fullData     = fullRaw.status==='fulfilled'   ? fullRaw.value   : [];
+    const resumen   = resR.status==='fulfilled'  ? resR.value  : [];
+    const productos = prodR.status==='fulfilled' ? prodR.value : [];
+    const fullRaw   = fullR.status==='fulfilled' ? fullR.value : [];
 
-    if(!resumenData.length) throw new Error('Sin datos en hoja RESUMEN');
+    if(!productos.length && !resumen.length) throw new Error('Sin datos en el sheet');
 
     document.getElementById('loading').style.display='none';
     document.getElementById('content').style.display='block';
 
-    // Última fila para fecha y datos del día
-    const last  = resumenData[resumenData.length-1];
-    const fecha = last['FECHA']||'';
-    document.getElementById('db-date').textContent = 'actualizado '+fecha;
+    // ---- Fecha más reciente desde PRODUCTOS ----
+    const fechasProds = productos.map(r=>String(r['FECHA']||'').substring(0,10)).filter(Boolean).sort();
+    const fechaMax    = fechasProds.length ? fechasProds[fechasProds.length-1] : '';
+    document.getElementById('db-date').textContent = 'actualizado '+fechaMax;
 
-    // ---- KPIs ÚLTIMOS 30 DÍAS ----
-    const rows30 = getLast30Days(resumenData, 'FECHA');
-    const fact30  = rows30.reduce((a,r)=>a+(r['FACTURACION']||r['TOTAL_FACTURACION']||0),0);
-    const neto30  = rows30.reduce((a,r)=>a+(r['NETO']||r['NETO_TOTAL']||0),0);
-    const ords30  = rows30.reduce((a,r)=>a+(r['ORDENES']||r['TOTAL_ORDENES']||0),0);
-    const coms30  = rows30.reduce((a,r)=>a+(r['COMISIONES']||r['TOTAL_COMISIONES']||0),0);
-    const cans30  = rows30.reduce((a,r)=>a+(r['CANCELADAS']||r['TOTAL_CANCELADAS']||0),0);
+    // ---- PRODUCTOS últimos 30 días ----
+    const prods30   = last30(productos, 'FECHA');
+    const prodsAgrup= agruparProductos(prods30);
+    const top10     = prodsAgrup.slice(0,10);
+
+    const fact30   = prods30.reduce((a,r)=>a+(parseFloat(r['FACTURACION'])||0),0);
+    const neto30   = prods30.reduce((a,r)=>a+(parseFloat(r['NETO'])||0),0);
+    const coms30   = prods30.reduce((a,r)=>a+(parseFloat(r['COMISIONES'])||0),0);
+    const ords30   = prods30.reduce((a,r)=>a+(parseFloat(r['CANTIDAD'])||0),0);
+    const cans30   = resumen.reduce((a,r)=>a+(parseFloat(r['CANCELADAS'])||0),0);
     const ticket30 = ords30>0 ? fact30/ords30 : 0;
 
     document.getElementById('k-fact').textContent   = fmtK(fact30);
     document.getElementById('k-neto').textContent   = fmtK(neto30);
     document.getElementById('k-ticket').textContent = fmtK(ticket30);
-    document.getElementById('k-cancel').textContent = cans30;
-    document.getElementById('k-ord').textContent    = ords30+' órdenes';
+    document.getElementById('k-cancel').textContent = Math.round(cans30);
+    document.getElementById('k-ord').textContent    = Math.round(ords30)+' unidades vendidas';
     document.getElementById('k-com').textContent    = fmtK(coms30)+' comisiones';
 
-    // ---- META MENSUAL ----
-    const mesActual   = fecha ? fecha.substring(0,7) : '';
-    const rowsMes     = resumenData.filter(r=>(r['FECHA']||'').startsWith(mesActual));
-    const netoMes     = rowsMes.reduce((a,r)=>a+(r['NETO']||r['NETO_TOTAL']||0),0);
-    const diaActual   = fecha ? parseInt(fecha.split('-')[2])||1 : 1;
-    const diasMes     = 30;
-    const diasRest    = diasMes - diaActual;
-    const promDiario  = diaActual>0 ? Math.round(netoMes/diaActual) : 0;
-    const proyFin     = promDiario * diasMes;
-    const pctMeta     = Math.min(100, pct(netoMes, META));
-    const needPerDay  = diasRest>0 ? Math.round((META-netoMes)/diasRest) : 0;
-    const netoHoy     = last['NETO']||last['NETO_TOTAL']||0;
+    // ---- META MENSUAL (usa RESUMEN para el neto acumulado del mes) ----
+    // Si RESUMEN tiene filas, usamos el NETO de la última fila (ya viene acumulado semanal de Gemini)
+    // Si no, usamos neto30 de PRODUCTOS
+    const lastRes   = resumen.length ? resumen[resumen.length-1] : null;
+    const netoMes   = lastRes ? (parseFloat(lastRes['NETO'])||0) : neto30;
+    const factMes   = lastRes ? (parseFloat(lastRes['FACTURACION'])||0) : fact30;
+    const proy      = lastRes ? (parseFloat(lastRes['PROYECCION_MENSUAL'])||0) : 0;
 
-    document.getElementById('meta-actual').textContent = fmtK(netoMes||netoHoy);
-    document.getElementById('meta-proy').textContent   = fmtK(proyFin);
-    document.getElementById('meta-dias').textContent   = 'día '+diaActual+' de '+diasMes;
-    document.getElementById('meta-fill').style.width   = pctMeta+'%';
-    document.getElementById('ms-hoy').textContent   = fmtK(netoHoy);
-    document.getElementById('ms-prom').textContent  = fmtK(promDiario);
-    document.getElementById('ms-rest').textContent  = diasRest+' días';
-    document.getElementById('ms-need').textContent  = fmtK(needPerDay)+'/día';
+    // Día actual del mes desde la fecha más reciente
+    const diaActual = fechaMax ? parseInt(fechaMax.split('-')[2])||1 : new Date().getDate();
+    const diasMes   = 30;
+    const diasRest  = Math.max(0, diasMes-diaActual);
+    const promDiario= diaActual>0 ? Math.round(netoMes/diaActual) : 0;
+    const proyFin   = proy||promDiario*diasMes;
+    const pctMeta   = Math.min(100,pct(netoMes,META));
+    const needPerDay= diasRest>0 ? Math.round((META-netoMes)/diasRest) : 0;
 
-    // ---- PRODUCTOS: últimos 30 días acumulados por producto ----
-    const prods30 = getLast30Days(productosData, 'FECHA');
+    document.getElementById('meta-actual').textContent  = fmtK(netoMes);
+    document.getElementById('meta-proy').textContent    = fmtK(proyFin);
+    document.getElementById('meta-dias').textContent    = 'día '+diaActual+' de '+diasMes;
+    document.getElementById('meta-fill').style.width    = pctMeta+'%';
+    document.getElementById('ms-fact30').textContent    = fmtK(fact30);
+    document.getElementById('ms-neto30').textContent    = fmtK(neto30);
+    document.getElementById('ms-prom').textContent      = fmtK(promDiario);
+    document.getElementById('ms-need').textContent      = fmtK(needPerDay)+'/día';
 
-    // Agrupar por producto y sumar
-    const prodMap = {};
-    prods30.forEach(p=>{
-      const key = p['PRODUCTO']||'—';
-      if(!prodMap[key]){
-        prodMap[key] = {
-          PRODUCTO: key,
-          CATEGORIA: p['CATEGORIA']||'Otros',
-          ES_FULL: p['ES_FULL']||'',
-          CANTIDAD: 0, FACTURACION: 0, NETO: 0
-        };
-      }
-      prodMap[key].CANTIDAD    += (p['CANTIDAD']||0);
-      prodMap[key].FACTURACION += (p['FACTURACION']||0);
-      prodMap[key].NETO        += (p['NETO']||0);
-    });
-    const prodsAgrup = Object.values(prodMap).sort((a,b)=>b.FACTURACION-a.FACTURACION);
-    const top10 = prodsAgrup.slice(0,10);
-
-    // CATEGORÍAS
+    // ---- CATEGORÍAS ----
     const catMap={};
-    prodsAgrup.forEach(p=>{
-      const cat=p['CATEGORIA']||'Otros';
-      catMap[cat]=(catMap[cat]||0)+p['FACTURACION'];
-    });
-    const totalFact = Object.values(catMap).reduce((a,b)=>a+b,0);
-    const catSorted = Object.entries(catMap).sort((a,b)=>b[1]-a[1]);
-
-    const catLegend = document.getElementById('cat-legend');
+    prods30.forEach(p=>{const c=p['CATEGORIA']||'Otros';catMap[c]=(catMap[c]||0)+(parseFloat(p['FACTURACION'])||0)});
+    const totalFact=Object.values(catMap).reduce((a,b)=>a+b,0);
+    const catSorted=Object.entries(catMap).sort((a,b)=>b[1]-a[1]);
+    const catLegend=document.getElementById('cat-legend');
     catSorted.forEach(([cat,monto])=>{
-      const p = totalFact>0?Math.round((monto/totalFact)*100):0;
-      const color = CAT_COLORS[cat]||'#999890';
+      const p=totalFact>0?Math.round((monto/totalFact)*100):0;
+      const color=CAT_COLORS[cat]||'#999890';
       catLegend.innerHTML+=`<div class="cat-row"><div class="cat-dot" style="background:${color}"></div><div class="cat-name">${cat}</div><div class="cat-bar-wrap"><div class="cat-bar" style="background:${color};width:${p}%"></div></div><div class="cat-pct">${p}%</div></div>`;
     });
 
-    // TABLE top10
-    const tbody = document.getElementById('prod-tbody');
+    // ---- TABLA top 10 ----
+    const tbody=document.getElementById('prod-tbody');
     top10.forEach(p=>{
-      const cat    = p['CATEGORIA']||'Otros';
-      const tagCls = TAG_CLASS[cat]||'tag-otro';
-      const esFull = String(p['ES_FULL']||'').toUpperCase()==='SI';
-      const tr = document.createElement('tr');
-      tr.innerHTML=`<td><div class="prod-name">${p['PRODUCTO']||'—'}</div></td><td><span class="tag ${tagCls}">${cat.split(' ')[0]}</span></td><td>${p['CANTIDAD']||0}</td><td><span class="${esFull?'full-yes':'full-no'}">${esFull?'Full':'No'}</span></td><td style="font-family:var(--mono);font-size:11px">${fmt(p['FACTURACION']||0)}</td><td><span class="neto">${fmt(p['NETO']||0)}</span></td>`;
+      const cat=p['CATEGORIA']||'Otros';
+      const tagCls=TAG_CLASS[cat]||'tag-otro';
+      const esFull=String(p['ES_FULL']||'').toUpperCase()==='SI'||String(p['ES_FULL']||'')===('Full')||String(p['ES_FULL']||'')==='full';
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td><div class="prod-name">${p['PRODUCTO']||'—'}</div></td><td><span class="tag ${tagCls}">${(cat.split(' ')[0]||'').substring(0,8)}</span></td><td>${Math.round(p['CANTIDAD'])}</td><td><span class="${esFull?'full-yes':'full-no'}">${esFull?'Full':'No'}</span></td><td style="font-family:var(--mono);font-size:11px">${fmt(p['FACTURACION'])}</td><td><span class="neto">${fmt(p['NETO'])}</span></td>`;
       tbody.appendChild(tr);
     });
 
-    document.getElementById('f-left').textContent = prodsAgrup.length+' productos · '+ords30+' órdenes · últimos 30 días';
+    document.getElementById('f-left').textContent=prodsAgrup.length+' productos · '+Math.round(ords30)+' unidades · últimos 30 días';
 
-    // FULL STOCK desde hoja FULL
-    renderFullStock(fullData);
+    // ---- FULL STOCK desde hoja FULL ----
+    const fullProcesado = procesarFull(fullRaw);
+    renderFull(fullProcesado, prodsAgrup);
 
-    // INSIGHTS
+    // ---- INSIGHTS ----
     renderInsights(netoMes, totalFact, catMap);
 
-    // CHART — top 10 productos 30 días
-    barChartInstance = new Chart(document.getElementById('barChart'),{
+    // ---- CHART ----
+    barChartInstance=new Chart(document.getElementById('barChart'),{
       type:'bar',
       data:{
-        labels: top10.map(p=>(p['PRODUCTO']||'').split(' ').slice(0,3).join(' ')),
+        labels:top10.map(p=>(p['PRODUCTO']||'').split(' ').slice(0,3).join(' ')),
         datasets:[{
-          data: top10.map(p=>p['FACTURACION']||0),
-          backgroundColor: top10.map(p=>CAT_COLORS[p['CATEGORIA']]||'#999890'),
+          data:top10.map(p=>p['FACTURACION']||0),
+          backgroundColor:top10.map(p=>CAT_COLORS[p['CATEGORIA']]||'#999890'),
           borderRadius:4,borderSkipped:false
         }]
       },
       options:{
         indexAxis:'y',responsive:true,maintainAspectRatio:false,
-        plugins:{
-          legend:{display:false},
-          tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}
-        },
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}},
         scales:{
           x:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:9},callback:v=>fmtK(v)}},
           y:{grid:{display:false},ticks:{font:{size:9}}}
@@ -635,6 +536,7 @@ async function init(){
     document.getElementById('loading').style.display='none';
     document.getElementById('err').style.display='block';
     document.getElementById('err').textContent='Error: '+e.message;
+    console.error(e);
   }
 }
 init();
